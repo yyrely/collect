@@ -171,11 +171,13 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
 
+        //负责人子用户列表
         if(user.getUserStatus() == UserStatusType.CHARGE) {
             List<User> list = userExtMapper.listUsersByFlagAndStatus(UserStatusType.NORMAL, user.getApplicationFlag());
             return list;
         }
 
+        //总管理下的负责人列表(多返回应用信息)
         if(user.getUserStatus() == UserStatusType.GENERAL_MANAGER) {
             List<UserVO> list = userExtMapper.listChargeUsers(UserStatusType.CHARGE);
             return list;

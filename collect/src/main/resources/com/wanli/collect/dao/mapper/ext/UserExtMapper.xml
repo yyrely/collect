@@ -1,5 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wanli.collect.dao.mapper.ext.UserExtMapper">
-  
+
+    <resultMap id="UserResultMap" type="com.wanli.collect.model.entity.User">
+        <id column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="father_id" jdbcType="BIGINT" property="fatherId" />
+        <result column="user_username" jdbcType="VARCHAR" property="userUsername" />
+        <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+        <result column="user_status" jdbcType="TINYINT" property="userStatus" />
+        <result column="application_flag" jdbcType="VARCHAR" property="applicationFlag" />
+    </resultMap>
+    
+    <resultMap id="UserVOResultMap" type="com.wanli.collect.model.vo.UserVO">
+        <id column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="father_id" jdbcType="BIGINT" property="fatherId" />
+        <result column="user_username" jdbcType="VARCHAR" property="userUsername" />
+        <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+        <result column="user_status" jdbcType="TINYINT" property="userStatus" />
+        <result column="application_flag" jdbcType="VARCHAR" property="applicationFlag" />
+        <association property="application" javaType="com.wanli.collect.model.entity.Application">
+            <id property="applicationId" column="application_id"/>
+            <result property="applicationName" column="application_name"/>
+        </association>
+    </resultMap>
+
+    <select id="findUserByUsernameAndFlag" resultMap="UserResultMap">
+        SELECT
+          user_id,
+          father_id,
+          user_username,
+          user_password,
+          user_status,
+          application_flag
+        FROM user
+        WHERE user_username = #{username}
+        and application_flag = #{applicationFlag}
+    </select>
+    <select id="listUsersByFlagAndStatus" resultMap="UserResultMap">
+        SELECT
+          user_id,
+          father_id,
+          user_username,
+          user_status,
+          application_flag
+        FROM user
+        WHERE user_status = #{status}
+        and application_flag = #{applicationFlag}
+    </select>
+    <select id="listChargeUsers" resultMap="UserVOResultMap">
+        SELECT
+          u.user_id,
+          u.father_id,
+          u.user_username,
+          u.user_status,
+          u.application_flag,
+          a.application_id,
+          a.application_name
+        FROM application a
+        left join user u
+        ON u.application_flag = a.application_flag
+        WHERE u.user_status = #{status}
+    </select>
 </mapper>

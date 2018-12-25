@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wanli.collect.dao.mapper.ext.ApplicationExtMapper">
-  
+
+    <resultMap id="BaseResultMap" type="com.wanli.collect.model.entity.Application">
+        <id column="application_id" jdbcType="BIGINT" property="applicationId" />
+        <result column="application_name" jdbcType="VARCHAR" property="applicationName" />
+        <result column="application_company" jdbcType="VARCHAR" property="applicationCompany" />
+        <result column="application_flag" jdbcType="VARCHAR" property="applicationFlag" />
+        <result column="application_time" jdbcType="TIMESTAMP" property="applicationTime" />
+        <result column="application_description" jdbcType="VARCHAR" property="applicationDescription" />
+    </resultMap>
+
+    <select id="findApplicationByFlag" resultMap="BaseResultMap">
+        SELECT
+          application_id,
+          application_name,
+          application_company,
+          application_flag,
+          application_time,
+          application_description
+        FROM application
+        WHERE application_flag = #{applicationFlag}
+    </select>
 </mapper>

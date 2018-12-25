@@ -176,7 +176,7 @@
 
             注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
          -->
-        <table tableName="transducer_type"
+        <table tableName="user"
                enableCountByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" enableUpdateByExample="false">
 
@@ -256,7 +256,7 @@
                column:要重新设置的列名；
                注意，一个table元素中可以有多个columnOverride元素哈~
              -->
-            <columnOverride column="task_type" javaType="com.chuncongcong.task.model.constants.TaskType"/>
+            <columnOverride column="user_status" javaType="com.wanli.collect.model.constants.UserStatusType"/>
             <columnOverride column="is_read" javaType="com.chuncongcong.task.model.constants.ReadType"/>
             <columnOverride column="role" javaType="com.chuncongcong.task.model.constants.RoleType" />
             <columnOverride column="gender" javaType="com.chuncongcong.task.model.constants.GenderType"/>

@@ -1,5 +1,6 @@
 package com.wanli.collect.model.entity;
 
+import com.wanli.collect.model.constants.UserStatusType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -53,7 +54,7 @@ public class User {
      *
      * @mbg.generated
      */
-    private Byte userStatus;
+    private UserStatusType userStatus;
 
     /**
      *

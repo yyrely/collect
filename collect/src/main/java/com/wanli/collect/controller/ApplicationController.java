@@ -1,10 +1,7 @@
 package com.wanli.collect.controller;
 
 import com.wanli.collect.service.ApplicationService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Hu
@@ -31,4 +28,39 @@ public class ApplicationController {
         return applicationService.checkApplicationFlag(applicationFlag);
     }
 
+    @GetMapping("/{flag}")
+    public Object findApplication(@PathVariable("flag") String applicationFlag) {
+        return applicationService.findApplication(applicationFlag);
+    }
+
+    @GetMapping
+    public Object listApplication(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                  @RequestParam(value = "size", defaultValue = "10") Integer size,
+                                  @RequestParam(value = "applicationName", defaultValue = "") String applicationName) {
+        return applicationService.listApplication(page, size, applicationName);
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

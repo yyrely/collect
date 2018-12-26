@@ -13,4 +13,20 @@ public interface ApplicationService {
      * @return
      */
     Object checkApplicationFlag(String applicationFlag);
+
+    /**
+     * 获取应用信息
+     * @param applicationFlag
+     * @return
+     */
+    Object findApplication(String applicationFlag);
+
+    /**
+     * 获取应用列表
+     * @param page
+     * @param size
+     * @param applicationName
+     * @return
+     */
+    Object listApplication(Integer page, Integer size, String applicationName);
 }

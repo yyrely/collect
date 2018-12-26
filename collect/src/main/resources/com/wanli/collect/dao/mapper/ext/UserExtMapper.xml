@@ -58,6 +58,6 @@
         FROM application a
         left join user u
         ON u.application_flag = a.application_flag
-        WHERE u.user_status = #{status}
+        WHERE u.user_status = "%"#{status}"%"
     </select>
 </mapper>

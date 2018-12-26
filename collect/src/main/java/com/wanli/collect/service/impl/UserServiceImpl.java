@@ -47,8 +47,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Object login(UserDTO userDTO) throws Exception {
-        //判断用户名和应用标识
-        if(StringUtils.isEmpty(userDTO.getUsername()) || StringUtils.isEmpty(userDTO.getApplicationFlag())) {
+        //判断用户名
+        if(StringUtils.isEmpty(userDTO.getUsername())) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
 
@@ -165,6 +165,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Object listUsers() {
 
         User user = RequestContext.getUserInfo();
@@ -187,6 +188,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Object updatePassword(Long userId, UserDTO userDTO) {
 
         User user = RequestContext.getUserInfo();
@@ -212,6 +214,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Object updateUser(Long userId, UserDTO userDTO) {
 
         User user = RequestContext.getUserInfo();
@@ -248,6 +251,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Object removeUser(Long userId) {
 
         User user = RequestContext.getUserInfo();

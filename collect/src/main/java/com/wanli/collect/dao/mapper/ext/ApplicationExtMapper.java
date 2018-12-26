@@ -4,6 +4,8 @@ import com.wanli.collect.model.entity.Application;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface ApplicationExtMapper extends com.wanli.collect.dao.mapper.ApplicationMapper {
 
@@ -14,4 +16,10 @@ public interface ApplicationExtMapper extends com.wanli.collect.dao.mapper.Appli
      */
     Application findApplicationByFlag(
             @Param("applicationFlag") String applicationFlag);
+
+    /**
+     * 获取应用列表
+     * @return
+     */
+    List<Application> listApplication(@Param("applicationName") String applicationName);
 }

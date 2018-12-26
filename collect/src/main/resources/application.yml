@@ -42,7 +42,15 @@ mybatis:
     cache-enabled: true
     default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
     use-generated-keys: true
-
+#分页设置
+pagehelper:
+  helperDialect: mysql
+  supportMethodsArguments: true
+  params: count=countSql
+#mybatis打印sql语句
+logging:
+  level:
+    com.wanli.collect: debug
 
 #session过期时间
 token:

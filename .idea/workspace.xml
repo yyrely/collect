@@ -2,28 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab4e7b83-4d49-4828-ad61-2f00fc1c41d2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_5_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_autoconfigure_1_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_starter_1_2_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_0_13_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_0_13_BUILD_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_2_0_13_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_2_0_13_BUILD_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_2_0_13_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_2_0_13_BUILD_SNAPSHOT.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/BoardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/BoardService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/BoardServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/collect/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/ApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/dao/mapper/ext/ApplicationExtMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/dao/mapper/ext/ApplicationExtMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/model/entity/Transducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/model/entity/Transducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/model/entity/TransducerDataConf.java" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/model/entity/TransducerDataConf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/ApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/ApplicationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/ApplicationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/ApplicationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/TransducerDataConfMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/TransducerDataConfMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/TransducerMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/TransducerMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/ApplicationExtMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/ApplicationExtMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/UserExtMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/UserExtMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/resources/generatorConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/dao/mapper/ext/BoardExtMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/dao/mapper/ext/BoardExtMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/BoardExtMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/BoardExtMapper.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/collect/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,98 +48,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/ApplicationController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="39" column="38" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/ApplicationService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/ApplicationServiceImpl.java">
+        <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/BoardController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1210">
-              <caret line="73" column="24" lean-forward="true" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
+            <state relative-caret-position="174">
+              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#442#443#0" expanded="true" />
+                <element signature="e#490#491#0" expanded="true" />
+                <element signature="e#966#967#0" expanded="true" />
+                <element signature="e#1000#1001#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://37683849-83f8-4998-b9b4-fa59a07fdbd3/schema/info_collect/table/application">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/37683849-83f8-4998-b9b4-fa59a07fdbd3/console_1.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="58" selection-start-column="58" selection-end-column="58" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collect/src/main/resources/application.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="606">
-              <caret line="51" column="8" lean-forward="true" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collect/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="82" column="17" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/dao/mapper/ext/ApplicationExtMapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="23" column="61" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/ApplicationExtMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="34" column="65" selection-start-line="34" selection-start-column="65" selection-end-line="34" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/UserExtMapper.xml">
+        <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/BoardService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="262">
-              <caret line="60" column="44" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
+              <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/BoardServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="658">
+              <caret line="55" column="5" lean-forward="true" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#416#417#0" expanded="true" />
+                <element signature="e#468#469#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/dao/mapper/ext/BoardExtMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/BoardExtMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="262">
+              <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -165,8 +110,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -208,15 +153,21 @@
         <option value="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/UserServiceImpl.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/collect/src/main/resources/generatorConfig.xml" />
-        <option value="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/ApplicationController.java" />
-        <option value="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/ApplicationService.java" />
         <option value="$PROJECT_DIR$/collect/pom.xml" />
         <option value="$PROJECT_DIR$/collect/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/dao/mapper/ext/ApplicationExtMapper.java" />
-        <option value="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/ApplicationServiceImpl.java" />
         <option value="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/UserExtMapper.xml" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/37683849-83f8-4998-b9b4-fa59a07fdbd3/console_1.sql" />
         <option value="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/ApplicationExtMapper.xml" />
+        <option value="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ApplicationMapper.xml" />
+        <option value="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/ApplicationService.java" />
+        <option value="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/ApplicationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/ApplicationController.java" />
+        <option value="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/dao/mapper/ext/BoardExtMapper.java" />
+        <option value="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/BoardExtMapper.xml" />
+        <option value="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/BoardService.java" />
+        <option value="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/BoardServiceImpl.java" />
+        <option value="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/BoardController.java" />
       </list>
     </option>
   </component>
@@ -400,7 +351,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545808790177" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545817475306" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../task_project" />
@@ -454,7 +405,7 @@
       <workItem from="1545395033843" duration="2562000" />
       <workItem from="1545397747638" duration="9819000" />
       <workItem from="1545702401170" duration="1462000" />
-      <workItem from="1545703890217" duration="31039000" />
+      <workItem from="1545703890217" duration="37883000" />
     </task>
     <task id="LOCAL-00001" summary="add user api">
       <created>1545731651995</created>
@@ -477,11 +428,25 @@
       <option name="project" value="LOCAL" />
       <updated>1545793597854</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="应用查询完成">
+      <created>1545809740768</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1545809740768</updated>
+    </task>
+    <task id="LOCAL-00005" summary="应用模块完成（删除未做）">
+      <created>1545813571411</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1545813571411</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44882000" />
+    <option name="totallyTimeSpent" value="51726000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
@@ -525,21 +490,21 @@
     </layout>
     <layout-to-restore>
       <window_info id="Web" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" weight="0.20362474" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.20362474" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
       <window_info id="UI Designer" order="5" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Database Console" order="0" visible="true" weight="0.32962137" />
+      <window_info anchor="bottom" id="Database Console" order="0" weight="0.32962137" />
       <window_info anchor="bottom" id="Messages" order="1" weight="0.32850778" />
       <window_info anchor="bottom" id="Java Enterprise" order="2" />
       <window_info anchor="bottom" id="Spring" order="3" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Find" order="5" />
       <window_info anchor="bottom" id="Run" order="6" weight="0.32850778" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.45657015" />
+      <window_info active="true" anchor="bottom" id="Debug" order="7" visible="true" weight="0.45657015" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -557,7 +522,7 @@
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.18766756" />
-      <window_info anchor="right" id="Database" order="9" visible="true" weight="0.15724947" />
+      <window_info anchor="right" id="Database" order="9" weight="0.15724947" />
       <window_info anchor="right" id="Maven" order="10" weight="0.17590618" />
     </layout-to-restore>
   </component>
@@ -568,14 +533,15 @@
     <MESSAGE value="add user api" />
     <MESSAGE value="加备注" />
     <MESSAGE value="用户模块完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="用户模块完成" />
+    <MESSAGE value="应用查询完成" />
+    <MESSAGE value="应用模块完成（删除未做）" />
+    <option name="LAST_COMMIT_MESSAGE" value="应用模块完成（删除未做）" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://E:/maven/apache-maven-3.5.2/repository/org/springframework/boot/spring-boot-dependencies/2.0.8.BUILD-SNAPSHOT/spring-boot-dependencies-2.0.8.BUILD-SNAPSHOT.pom" />
     <entry file="file://E:/maven/apache-maven-3.5.2/repository/org/springframework/boot/spring-boot-starter-parent/2.0.8.BUILD-SNAPSHOT/spring-boot-starter-parent-2.0.8.BUILD-SNAPSHOT.pom" />
     <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/model/domain/ResultBeen.java" />
     <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/handler/ResultFormatHandler.java">
@@ -815,24 +781,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="48" column="57" lean-forward="true" selection-start-line="48" selection-start-column="57" selection-end-line="48" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/dao/mapper/UserMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
           <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ApplicationMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="14" lean-forward="true" selection-start-line="3" selection-start-column="2" selection-end-line="14" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -937,23 +889,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/ApplicationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="39" column="38" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/ApplicationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/UserExtMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
@@ -977,24 +912,116 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/dao/mapper/ext/ApplicationExtMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
+        <state relative-caret-position="418">
           <caret line="23" column="61" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="61" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/ApplicationExtMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
+        <state relative-caret-position="628">
           <caret line="34" column="65" selection-start-line="34" selection-start-column="65" selection-end-line="34" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ApplicationMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="47" column="29" lean-forward="true" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/dao/mapper/ApplicationMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="45" column="4" selection-start-line="45" selection-start-column="4" selection-end-line="47" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/ApplicationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="650">
+          <caret line="46" column="7" lean-forward="true" selection-start-line="46" selection-start-column="7" selection-end-line="46" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/ApplicationServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1210">
-          <caret line="73" column="24" lean-forward="true" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
+        <state relative-caret-position="2684">
+          <caret line="122" column="134" selection-start-line="122" selection-start-column="134" selection-end-line="122" selection-end-column="134" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/ApplicationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/BoardMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="14" lean-forward="true" selection-start-line="3" selection-start-column="2" selection-end-line="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/BoardExtMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/dao/mapper/ext/BoardExtMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/BoardService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/BoardServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="658">
+          <caret line="55" column="5" lean-forward="true" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#416#417#0" expanded="true" />
+            <element signature="e#468#469#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/BoardController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#442#443#0" expanded="true" />
+            <element signature="e#490#491#0" expanded="true" />
+            <element signature="e#966#967#0" expanded="true" />
+            <element signature="e#1000#1001#0" expanded="true" />
           </folding>
         </state>
       </provider>

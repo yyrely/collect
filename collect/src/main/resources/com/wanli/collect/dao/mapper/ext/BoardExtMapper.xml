@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wanli.collect.dao.mapper.ext.BoardExtMapper">
-  
+
+    <resultMap id="BoardResultMap" type="com.wanli.collect.model.entity.Board">
+        <id column="board_id" jdbcType="VARCHAR" property="boardId" />
+        <result column="application_flag" jdbcType="VARCHAR" property="applicationFlag" />
+        <result column="board_name" jdbcType="VARCHAR" property="boardName" />
+        <result column="board_status" jdbcType="INTEGER" property="boardStatus" />
+        <result column="board_time" jdbcType="TIMESTAMP" property="boardTime" />
+        <result column="board_description" jdbcType="VARCHAR" property="boardDescription" />
+    </resultMap>
+
+    <select id="listBoardByFlag" resultMap="BoardResultMap">
+        SELECT
+          board_id,
+          application_flag,
+          board_name,
+          board_status,
+          board_time,
+          board_description
+        FROM board
+        WHERE application_flag = #{applicationFlag}
+        ORDER BY board_status DESC
+    </select>
 </mapper>

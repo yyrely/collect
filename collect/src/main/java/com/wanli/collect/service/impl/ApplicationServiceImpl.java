@@ -12,6 +12,7 @@ import com.wanli.collect.model.entity.User;
 import com.wanli.collect.service.ApplicationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -72,6 +73,55 @@ public class ApplicationServiceImpl implements ApplicationService {
         List<Application> applications = applicationExtMapper.listApplication(applicationName);
         PageInfo<Application> pageInfo = new PageInfo<>(applications);
         return pageInfo;
+    }
+
+    @Override
+    public Object saveApplication(Application application) {
+
+        User user = RequestContext.getUserInfo();
+        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+
+        if(StringUtils.isEmpty(application.getApplicationName())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(StringUtils.isEmpty(application.getApplicationCompany())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(StringUtils.isEmpty(application.getApplicationFlag())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        checkApplicationFlag(application.getApplicationFlag());
+
+        applicationExtMapper.insert(application);
+
+        return application;
+    }
+
+
+    @Override
+    public Object updateApplication(Long applicationId, Application application) {
+        User user = RequestContext.getUserInfo();
+        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+
+        Application applicationInfo = applicationExtMapper.selectByPrimaryKey(applicationId);
+        if(applicationInfo == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(StringUtils.isEmpty(application.getApplicationName())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(StringUtils.isEmpty(application.getApplicationCompany())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        applicationExtMapper.updateByPrimaryKeySelective(Application.builder()
+                                                                    .applicationId(applicationId)
+                                                                    .applicationName(application.getApplicationName())
+                                                                    .applicationCompany(application.getApplicationCompany()).build());
+        return null;
     }
 }
 

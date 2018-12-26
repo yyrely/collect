@@ -1,5 +1,7 @@
 package com.wanli.collect.service;
 
+import com.wanli.collect.model.entity.Application;
+
 /**
  * @author Hu
  * @date 2018/12/25 16:18
@@ -29,4 +31,19 @@ public interface ApplicationService {
      * @return
      */
     Object listApplication(Integer page, Integer size, String applicationName);
+
+    /**
+     * 添加应用
+     * @param application
+     * @return
+     */
+    Object saveApplication(Application application);
+
+    /**
+     * 更新应用
+     * @param applicationId
+     * @param application
+     * @return
+     */
+    Object updateApplication(Long applicationId, Application application);
 }

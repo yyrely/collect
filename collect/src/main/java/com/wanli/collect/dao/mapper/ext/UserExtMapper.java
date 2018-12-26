@@ -23,13 +23,11 @@ public interface UserExtMapper extends com.wanli.collect.dao.mapper.UserMapper {
 
     /**
      * 根据用户角色和应用标识
-     * @param status
-     * @param applicationFlag
+     * @param fatherId
      * @return
      */
-    List<User> listUsersByFlagAndStatus(
-            @Param("status") UserStatusType status,
-            @Param("applicationFlag") String applicationFlag);
+    List<User> listUsersByFatherId(
+            @Param("fatherId") Long fatherId);
 
     /**
      * 获取负责人和应用信息

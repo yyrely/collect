@@ -1,6 +1,7 @@
 package com.wanli.collect.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +23,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/info")
-    public Object findUserInfo(@RequestParam("userId") Long userId) {
-        return userService.findUserInfo(userId);
+    @GetMapping("/{userId}")
+    public Object findUserInfo(@PathVariable("userId") Long userId) {
+        return userService.findUser(userId);
     }
 
     /**
@@ -64,6 +65,35 @@ public class UserController {
     @GetMapping
     public Object listUsers() {
         return userService.listUsers();
+    }
+
+    /**
+     * 修改自己密码
+     * @param userId
+     * @param userDTO
+     * @return
+     */
+    @PutMapping("/{userId}/passwords")
+    public Object updatePassword(@PathVariable("userId") Long userId,
+                                 @RequestBody UserDTO userDTO) {
+        return userService.updatePassword(userId, userDTO);
+    }
+
+    /**
+     * 管理员修改子用户密码
+     * @param userId
+     * @param userDTO
+     * @return
+     */
+    @PutMapping("/{userId}")
+    public Object updateUser(@PathVariable("userId") Long userId,
+                                 @RequestBody UserDTO userDTO) {
+        return userService.updateUser(userId, userDTO);
+    }
+
+    @DeleteMapping("/{userId}")
+    public Object removeUser(@PathVariable("userId") Long userId) {
+        return userService.removeUser(userId);
     }
 
 

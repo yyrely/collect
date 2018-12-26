@@ -36,7 +36,7 @@
         WHERE user_username = #{username}
         and application_flag = #{applicationFlag}
     </select>
-    <select id="listUsersByFlagAndStatus" resultMap="UserResultMap">
+    <select id="listUsersByFatherId" resultMap="UserResultMap">
         SELECT
           user_id,
           father_id,
@@ -44,8 +44,7 @@
           user_status,
           application_flag
         FROM user
-        WHERE user_status = #{status}
-        and application_flag = #{applicationFlag}
+        WHERE father_id = #{fatherId}
     </select>
     <select id="listChargeUsers" resultMap="UserVOResultMap">
         SELECT

@@ -12,13 +12,18 @@ import com.wanli.collect.model.vo.UserVO;
 
 public interface UserService {
 
-    Object findUserInfo(Long userId);
+    /**
+     * 获取用户信息
+     * @param userId
+     * @return
+     */
+    Object findUser(Long userId);
 
     /**
      * 用户登录
      * @param userDTO
      */
-    Object login(UserDTO userDTO) throws JsonProcessingException;
+    Object login(UserDTO userDTO) throws Exception;
 
     /**
      * 创建用户
@@ -38,4 +43,27 @@ public interface UserService {
      * @return
      */
     Object listUsers();
+
+    /**
+     * 修改密码
+     * @param userId
+     * @param userDTO
+     * @return
+     */
+    Object updatePassword(Long userId, UserDTO userDTO);
+
+    /**
+     * 更新用户信息
+     * @param userId
+     * @param userDTO
+     * @return
+     */
+    Object updateUser(Long userId, UserDTO userDTO);
+
+    /**
+     * 删除子用户
+     * @param userId
+     * @return
+     */
+    Object removeUser(Long userId);
 }

@@ -21,9 +21,11 @@ public class UserDTO {
 
     private Long fatherId;
 
-    private String userUsername;
+    private String username;
 
-    private String userPassword;
+    private String password;
+
+    private String newPassword;
 
     private UserStatusType userStatus;
 

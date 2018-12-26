@@ -59,11 +59,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             throw new ServiceException(BaseErrorCode.OTHER_LOGIN);
         }
 
-        User users = objectMapper.readValue(userJson, User.class);
-        stringRedisTemplate.expire(Contants.ONLINE_USER + users.getUserUsername(), tokenTimeout, TimeUnit.SECONDS);
+        User user = objectMapper.readValue(userJson, User.class);
+        stringRedisTemplate.expire(Contants.ONLINE_USER + user.getApplicationFlag() + user.getUserUsername(), tokenTimeout, TimeUnit.SECONDS);
         stringRedisTemplate.expire(Contants.ONLINE_TOKEN + token, tokenTimeout, TimeUnit.SECONDS);
 
-        RequestContext.setUserInfo(users);
+        RequestContext.setUserInfo(user);
         log.debug("===> check token,cost {}ms", System.currentTimeMillis() - RequestContext.getRequestTime());
         return true;
     }

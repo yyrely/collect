@@ -1,6 +1,15 @@
 package com.wanli.collect.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wanli.collect.context.RequestContext;
 import com.wanli.collect.dao.mapper.ext.UserExtMapper;
@@ -12,16 +21,6 @@ import com.wanli.collect.model.dto.UserDTO;
 import com.wanli.collect.model.entity.User;
 import com.wanli.collect.model.vo.UserVO;
 import com.wanli.collect.service.UserService;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
-
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Hu
@@ -47,27 +46,27 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class, readOnly = true)
-    public Object login(UserDTO userDTO) throws JsonProcessingException {
+    public Object login(UserDTO userDTO) throws Exception {
         //判断用户名和应用标识
-        if(StringUtils.isEmpty(userDTO.getUserUsername()) || StringUtils.isEmpty(userDTO.getApplicationFlag())) {
+        if(StringUtils.isEmpty(userDTO.getUsername()) || StringUtils.isEmpty(userDTO.getApplicationFlag())) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
 
         //查找用户并判断
-        User existUser = userExtMapper.findUserByUsernameAndFlag(userDTO.getUserUsername(), userDTO.getApplicationFlag());
+        User existUser = userExtMapper.findUserByUsernameAndFlag(userDTO.getUsername(), userDTO.getApplicationFlag());
         if(existUser == null) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
 
         //判断密码
-        if(!existUser.getUserPassword().equals(userDTO.getUserPassword())) {
+        if(!existUser.getUserPassword().equals(userDTO.getPassword())) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
 
         //防止重复登录
-        String token = redisTemplate.opsForValue().get(Contants.ONLINE_USER + existUser.getUserUsername());
+        String token = redisTemplate.opsForValue().get(Contants.ONLINE_USER + existUser.getApplicationFlag() + existUser.getUserUsername());
         if(!StringUtils.isEmpty(token)) {
-            redisTemplate.expire(Contants.ONLINE_USER + userDTO.getUserUsername(), 0, TimeUnit.SECONDS);
+            redisTemplate.expire(Contants.ONLINE_USER + existUser.getApplicationFlag() + existUser.getUserUsername(), 0, TimeUnit.SECONDS);
             redisTemplate.opsForValue().set(Contants.ONLINE_TOKEN + token, "other login");
             redisTemplate.expire(Contants.ONLINE_TOKEN + token, 600, TimeUnit.SECONDS);
         }
@@ -75,13 +74,14 @@ public class UserServiceImpl implements UserService {
         token = UUID.randomUUID().toString();
         String userJson = objectMapper.writeValueAsString(existUser);
         redisTemplate.opsForValue().set(Contants.ONLINE_TOKEN + token, userJson);
-        redisTemplate.opsForValue().set(Contants.ONLINE_USER + existUser.getUserUsername(), token);
+        redisTemplate.opsForValue().set(Contants.ONLINE_USER + existUser.getApplicationFlag() + existUser.getUserUsername(), token);
         redisTemplate.expire(Contants.ONLINE_TOKEN + token, tokenTimeout, TimeUnit.SECONDS);
-        redisTemplate.expire(Contants.ONLINE_USER + existUser.getUserUsername(), tokenTimeout, TimeUnit.SECONDS);
+        redisTemplate.expire(Contants.ONLINE_USER + existUser.getApplicationFlag() + existUser.getUserUsername(), tokenTimeout, TimeUnit.SECONDS);
 
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(existUser,userVO);
         userVO.setToken(token);
+        userVO.setUserPassword(null);
 
         return userVO;
     }
@@ -102,10 +102,10 @@ public class UserServiceImpl implements UserService {
         //负责人创建子用户
         if(user.getUserStatus() == UserStatusType.CHARGE) {
 
-            if(StringUtils.isEmpty(userDTO.getUserUsername())) {
+            if(StringUtils.isEmpty(userDTO.getUsername())) {
                 throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
             }
-            checkUsername(userDTO.getUserUsername(), user.getApplicationFlag());
+            checkUsername(userDTO.getUsername(), user.getApplicationFlag());
 
             newUser.setApplicationFlag(user.getApplicationFlag());
             newUser.setFatherId(user.getUserId());
@@ -118,12 +118,12 @@ public class UserServiceImpl implements UserService {
         //总管理创建负责人
         if(user.getUserStatus() == UserStatusType.GENERAL_MANAGER) {
 
-            if(StringUtils.isEmpty(userDTO.getUserUsername()) || StringUtils.isEmpty(user.getApplicationFlag())) {
+            if(StringUtils.isEmpty(userDTO.getUsername()) || StringUtils.isEmpty(user.getApplicationFlag())) {
                 throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
             }
-            checkUsername(userDTO.getUserUsername(), userDTO.getApplicationFlag());
+            checkUsername(userDTO.getUsername(), userDTO.getApplicationFlag());
             newUser.setUserStatus(UserStatusType.CHARGE);
-            newUser.setFatherId(0L);
+            newUser.setFatherId(user.getUserId());
             userExtMapper.insert(newUser);
             newUser.setUserPassword(null);
             return newUser;
@@ -147,16 +147,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class, readOnly = true)
-    public Object findUserInfo(Long userId) {
-        return userExtMapper.selectByPrimaryKey(userId);
+    public Object findUser(Long userId) {
+        User user = userExtMapper.selectByPrimaryKey(userId);
+        user.setUserPassword(null);
+        return user;
     }
 
     @Override
     public Object logout() {
-        User users = RequestContext.getUserInfo();
-        String token = redisTemplate.opsForValue().get(Contants.ONLINE_USER + users.getUserUsername());
+        User user = RequestContext.getUserInfo();
+        String token = redisTemplate.opsForValue().get(Contants.ONLINE_USER + user.getApplicationFlag() + user.getUserUsername());
 
-        redisTemplate.expire(Contants.ONLINE_USER + users.getUserUsername(), 0, TimeUnit.SECONDS);
+        redisTemplate.expire(Contants.ONLINE_USER + user.getApplicationFlag() + user.getUserUsername(), 0, TimeUnit.SECONDS);
         redisTemplate.expire(Contants.ONLINE_TOKEN + token, 0, TimeUnit.SECONDS);
 
         return null;
@@ -173,20 +175,97 @@ public class UserServiceImpl implements UserService {
 
         //负责人子用户列表
         if(user.getUserStatus() == UserStatusType.CHARGE) {
-            List<User> list = userExtMapper.listUsersByFlagAndStatus(UserStatusType.NORMAL, user.getApplicationFlag());
-            return list;
+            return userExtMapper.listUsersByFatherId(user.getFatherId());
         }
 
         //总管理下的负责人列表(多返回应用信息)
         if(user.getUserStatus() == UserStatusType.GENERAL_MANAGER) {
-            List<UserVO> list = userExtMapper.listChargeUsers(UserStatusType.CHARGE);
-            return list;
+            return userExtMapper.listChargeUsers(UserStatusType.CHARGE);
         }
 
         return null;
     }
-}
 
+    @Override
+    public Object updatePassword(Long userId, UserDTO userDTO) {
+
+        User user = RequestContext.getUserInfo();
+
+        if(!user.getUserId().equals(userId)) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+
+        User userInfo = userExtMapper.selectByPrimaryKey(userId);
+
+        if(!userInfo.getUserPassword().equals(userDTO.getPassword())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
+        userInfo.setUserPassword(userDTO.getNewPassword());
+        userExtMapper.updateByPrimaryKeySelective(userInfo);
+
+        //已登录用户退出登录
+        logout();
+
+        return null;
+    }
+
+
+    @Override
+    public Object updateUser(Long userId, UserDTO userDTO) {
+
+        User user = RequestContext.getUserInfo();
+
+        if(StringUtils.isEmpty(userDTO.getPassword())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
+        if(user.getUserStatus() == UserStatusType.NORMAL) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+
+        User userInfo = userExtMapper.selectByPrimaryKey(userId);
+        if(userInfo == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
+        if(!userInfo.getFatherId().equals(user.getUserId())) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+
+        userInfo.setUserPassword(userDTO.getPassword());
+        userExtMapper.updateByPrimaryKeySelective(userInfo);
+
+        //修改密码的用户退出登录
+        String token = redisTemplate.opsForValue().get(Contants.ONLINE_USER + userInfo.getApplicationFlag() + userInfo.getUserUsername());
+        if(!StringUtils.isEmpty(token)) {
+            redisTemplate.expire(Contants.ONLINE_USER + userInfo.getApplicationFlag() + userInfo.getUserUsername(), 0, TimeUnit.SECONDS);
+            redisTemplate.expire(Contants.ONLINE_TOKEN + token, 0, TimeUnit.SECONDS);
+        }
+
+        return null;
+    }
+
+
+    @Override
+    public Object removeUser(Long userId) {
+
+        User user = RequestContext.getUserInfo();
+
+        User userInfo = userExtMapper.selectByPrimaryKey(userId);
+        if(userInfo == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
+        if(!userInfo.getFatherId().equals(user.getUserId())) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+
+        userExtMapper.deleteByPrimaryKey(userId);
+
+        return null;
+    }
+}
 
 
 

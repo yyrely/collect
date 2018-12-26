@@ -15,7 +15,7 @@ public interface BoardService {
     Object listBoardByFlag(String applicationFlag);
 
     /**
-     *
+     * 单块板信息
      * @param boardId
      * @return
      */

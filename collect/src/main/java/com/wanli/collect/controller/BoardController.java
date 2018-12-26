@@ -31,7 +31,11 @@ public class BoardController {
         return boardService.listBoardByFlag(applicationFlag);
     }
 
-
+    /**
+     * 单块板信息
+     * @param boardId
+     * @return
+     */
     @GetMapping("/{boardId}")
     public Object findBoardInfo(@PathVariable("boardId") String boardId) {
         return boardService.findBoardInfo(boardId);

@@ -22,4 +22,10 @@ public interface ApplicationExtMapper extends com.wanli.collect.dao.mapper.Appli
      * @return
      */
     List<Application> listApplication(@Param("applicationName") String applicationName);
+
+    /**
+     * 获取应用标识列表
+     * @return
+     */
+    List<Application> listApplicationFlags();
 }

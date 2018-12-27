@@ -46,4 +46,10 @@ public interface ApplicationService {
      * @return
      */
     Object updateApplication(Long applicationId, Application application);
+
+    /**
+     * 获取应用标识列表
+     * @return
+     */
+    Object listApplicationFlags();
 }

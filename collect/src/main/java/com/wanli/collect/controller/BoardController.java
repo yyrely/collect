@@ -1,10 +1,8 @@
 package com.wanli.collect.controller;
 
+import com.wanli.collect.model.entity.Board;
 import com.wanli.collect.service.BoardService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Hu
@@ -40,6 +38,45 @@ public class BoardController {
     public Object findBoardInfo(@PathVariable("boardId") String boardId) {
         return boardService.findBoardInfo(boardId);
     }
+
+    /**
+     * 验证板id
+     * @param boardId
+     * @return
+     */
+    @PostMapping("/check/{boardId}")
+    public Object checkBoardId(@PathVariable("boardId") String boardId) {
+        return boardService.checkBoardId(boardId);
+    }
+
+    /**
+     * 添加板
+     * @param board
+     * @return
+     */
+    @PostMapping
+    public Object saveBoard(@RequestBody Board board) {
+        return boardService.saveBoard(board);
+    }
+
+    /**
+     * 更新板(名字)
+     * @param boardId
+     * @param board
+     * @return
+     */
+    @PutMapping("/{boardId}")
+    public Object updateBoard(@PathVariable("boardId") String boardId, @RequestBody Board board) {
+        return boardService.updateBoard(boardId, board);
+    }
+
+
+    @DeleteMapping("/{boardId}")
+    public Object removeBoard(@PathVariable("boardId") String boardId) {
+        //TODO 删除未做
+        return null;
+    }
+
 
 
 

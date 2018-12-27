@@ -75,6 +75,11 @@ public class ApplicationController {
         return applicationService.updateApplication(applicationId, application);
     }
 
+    @GetMapping("/flags")
+    public Object listApplicationFlags() {
+        return applicationService.listApplicationFlags();
+    }
+
     /**
      * 删除应用
      * @param applicationId

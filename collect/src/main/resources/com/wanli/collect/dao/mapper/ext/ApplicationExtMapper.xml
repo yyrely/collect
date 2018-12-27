@@ -36,4 +36,11 @@
         </if>
 
     </select>
+    <select id="listApplicationFlags" resultMap="ApplicationResultMap">
+        SELECT
+          application_name,
+          application_flag
+        FROM application
+        GROUP BY application_flag
+    </select>
 </mapper>

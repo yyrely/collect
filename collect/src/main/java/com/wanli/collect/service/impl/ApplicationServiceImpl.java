@@ -102,13 +102,12 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public Object updateApplication(Long applicationId, Application application) {
+
         User user = RequestContext.getUserInfo();
         if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER) {
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
-
-        Application applicationInfo = applicationExtMapper.selectByPrimaryKey(applicationId);
-        if(applicationInfo == null) {
+        if(applicationId == null) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
         if(StringUtils.isEmpty(application.getApplicationName())) {
@@ -117,11 +116,29 @@ public class ApplicationServiceImpl implements ApplicationService {
         if(StringUtils.isEmpty(application.getApplicationCompany())) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
+        Application applicationInfo = applicationExtMapper.selectByPrimaryKey(applicationId);
+        if(applicationInfo == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
         applicationExtMapper.updateByPrimaryKeySelective(Application.builder()
                                                                     .applicationId(applicationId)
                                                                     .applicationName(application.getApplicationName())
                                                                     .applicationCompany(application.getApplicationCompany()).build());
         return null;
+    }
+
+    @Override
+    public Object listApplicationFlags() {
+
+        User user = RequestContext.getUserInfo();
+        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+
+        List<Application> flagList = applicationExtMapper.listApplicationFlags();
+
+        return flagList;
     }
 }
 

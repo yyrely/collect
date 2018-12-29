@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wanli.collect.dao.mapper.ext.CollectDataExtMapper">
-  
+
+    <resultMap id="DataResultMap" type="com.wanli.collect.model.entity.CollectData">
+        <id column="data_id" jdbcType="BIGINT" property="dataId" />
+        <result column="board_id" jdbcType="VARCHAR" property="boardId" />
+        <result column="transducer_type" jdbcType="VARCHAR" property="transducerType" />
+        <result column="transducer_id" jdbcType="VARCHAR" property="transducerId" />
+        <result column="transducer_data" jdbcType="DECIMAL" property="transducerData" />
+        <result column="data_time" jdbcType="TIMESTAMP" property="dataTime" />
+    </resultMap>
+
+    <select id="listData" resultMap="DataResultMap">
+        SELECT
+          data_id,
+          board_id,
+          transducer_type,
+          transducer_id,
+          transducer_data,
+          data_time
+        From collect_data
+        WHERE board_id = #{transducerKeyBean.boardId}
+        and transducer_type = #{transducerKeyBean.transducerType}
+        and transducer_id = #{transducerKeyBean.transducerId}
+    </select>
 </mapper>

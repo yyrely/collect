@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wanli.collect.dao.mapper.ext.TransducerDataConfExtMapper">
-  
+
+    <resultMap id="TransducerDataConfResultMap" type="com.wanli.collect.model.entity.TransducerDataConf">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="board_id" jdbcType="VARCHAR" property="boardId" />
+        <result column="transducer_type" jdbcType="VARCHAR" property="transducerType" />
+        <result column="transducer_id" jdbcType="VARCHAR" property="transducerId" />
+        <result column="transducer_max" jdbcType="DECIMAL" property="transducerMax" />
+        <result column="transducer_min" jdbcType="DECIMAL" property="transducerMin" />
+        <result column="transducer_errornum" jdbcType="DECIMAL" property="transducerErrornum" />
+        <result column="transducer_level" jdbcType="DECIMAL" property="transducerLevel" />
+        <result column="transducer_warntime" jdbcType="INTEGER" property="transducerWarntime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="conf_description" jdbcType="VARCHAR" property="confDescription" />
+    </resultMap>
+
+    <select id="findTransducerDataConf" resultMap="TransducerDataConfResultMap">
+        SELECT
+          id,
+          board_id,
+          transducer_type,
+          transducer_id,
+          transducer_max,
+          transducer_min,
+          transducer_errornum,
+          transducer_level,
+          transducer_warntime,
+          update_time,
+          conf_description
+        FROM transducer_data_conf
+        WHERE board_id = #{transducerKeyBean.boardId}
+        and transducer_type = #{transducerKeyBean.transducerType}
+        and transducer_id = #{transducerKeyBean.transducerId}
+    </select>
 </mapper>

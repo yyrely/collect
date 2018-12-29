@@ -1,5 +1,7 @@
 package com.wanli.collect.model.entity;
 
+import com.wanli.collect.model.constants.DataStatusType;
+import java.math.BigDecimal;
 import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -54,7 +56,7 @@ public class Transducer {
      *
      * @mbg.generated
      */
-    private Integer transducerStatus;
+    private DataStatusType transducerStatus;
 
     /**
      *
@@ -63,7 +65,7 @@ public class Transducer {
      *
      * @mbg.generated
      */
-    private Double transducerNowdata;
+    private BigDecimal transducerNowdata;
 
     /**
      *

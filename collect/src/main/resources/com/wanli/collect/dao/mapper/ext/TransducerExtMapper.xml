@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wanli.collect.dao.mapper.ext.TransducerExtMapper">
-  
+
+    <resultMap id="TransducerResultMap" type="com.wanli.collect.model.entity.Transducer">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="board_id" jdbcType="VARCHAR" property="boardId" />
+        <result column="transducer_type" jdbcType="VARCHAR" property="transducerType" />
+        <result column="transducer_id" jdbcType="VARCHAR" property="transducerId" />
+        <result column="transducer_status" jdbcType="TINYINT" property="transducerStatus" />
+        <result column="transducer_nowdata" jdbcType="DECIMAL" property="transducerNowdata" />
+        <result column="transducer_unit" jdbcType="VARCHAR" property="transducerUnit" />
+        <result column="transducer_time" jdbcType="TIMESTAMP" property="transducerTime" />
+        <result column="transducer_description" jdbcType="VARCHAR" property="transducerDescription" />
+    </resultMap>
+
+    <select id="listTransducerByBoardId" resultMap="TransducerResultMap">
+        SELECT
+          id,
+          board_id,
+          transducer_type,
+          transducer_id,
+          transducer_status,
+          transducer_nowdata,
+          transducer_unit,
+          transducer_time,
+          transducer_description
+        FROM transducer
+        WHERE board_id = #{boardId}
+    </select>
 </mapper>

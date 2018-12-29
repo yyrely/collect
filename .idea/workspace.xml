@@ -4,7 +4,7 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab4e7b83-4d49-4828-ad61-2f00fc1c41d2" name="Default Changelist" comment="">
+    <list default="true" id="ab4e7b83-4d49-4828-ad61-2f00fc1c41d2" name="Default Changelist" comment="传感器模块查询完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/collect/target/" />
@@ -53,7 +53,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/TransducerController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="584">
@@ -99,11 +99,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/TransducerExtMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
+            <state relative-caret-position="506">
+              <caret line="23" column="29" lean-forward="true" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -370,7 +370,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545904202105" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546046162573" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../task_project" />
@@ -424,7 +424,7 @@
       <workItem from="1545395033843" duration="2562000" />
       <workItem from="1545397747638" duration="9819000" />
       <workItem from="1545702401170" duration="1462000" />
-      <workItem from="1545703890217" duration="56352000" />
+      <workItem from="1545703890217" duration="57107000" />
     </task>
     <task id="LOCAL-00001" summary="add user api">
       <created>1545731651995</created>
@@ -482,18 +482,25 @@
       <option name="project" value="LOCAL" />
       <updated>1545890444638</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="传感器模块查询完成">
+      <created>1545904234979</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1545904234979</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70195000" />
+    <option name="totallyTimeSpent" value="70950000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Web" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" weight="0.20362474" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.20362474" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -578,7 +585,8 @@
     <MESSAGE value="板模块查询功能" />
     <MESSAGE value="添加备注" />
     <MESSAGE value="板模块完成（删除未做）" />
-    <option name="LAST_COMMIT_MESSAGE" value="板模块完成（删除未做）" />
+    <MESSAGE value="传感器模块查询完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="传感器模块查询完成" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1070,13 +1078,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/TransducerExtMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/dao/mapper/ext/TransducerExtMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -1112,6 +1113,13 @@
             <element signature="e#723#724#0" expanded="true" />
             <element signature="e#796#797#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/TransducerExtMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="23" column="29" lean-forward="true" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
         </state>
       </provider>
     </entry>

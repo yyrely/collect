@@ -10,8 +10,8 @@
     <result column="board_id" jdbcType="VARCHAR" property="boardId" />
     <result column="transducer_type" jdbcType="VARCHAR" property="transducerType" />
     <result column="transducer_id" jdbcType="VARCHAR" property="transducerId" />
-    <result column="transducer_status" jdbcType="INTEGER" property="transducerStatus" />
-    <result column="transducer_nowdata" jdbcType="DOUBLE" property="transducerNowdata" />
+    <result column="transducer_status" jdbcType="TINYINT" property="transducerStatus" />
+    <result column="transducer_nowdata" jdbcType="DECIMAL" property="transducerNowdata" />
     <result column="transducer_unit" jdbcType="VARCHAR" property="transducerUnit" />
     <result column="transducer_time" jdbcType="TIMESTAMP" property="transducerTime" />
     <result column="transducer_description" jdbcType="VARCHAR" property="transducerDescription" />
@@ -52,7 +52,7 @@
       transducer_time, transducer_description
       )
     values (#{boardId,jdbcType=VARCHAR}, #{transducerType,jdbcType=VARCHAR}, #{transducerId,jdbcType=VARCHAR}, 
-      #{transducerStatus,jdbcType=INTEGER}, #{transducerNowdata,jdbcType=DOUBLE}, #{transducerUnit,jdbcType=VARCHAR}, 
+      #{transducerStatus,jdbcType=TINYINT}, #{transducerNowdata,jdbcType=DECIMAL}, #{transducerUnit,jdbcType=VARCHAR}, 
       #{transducerTime,jdbcType=TIMESTAMP}, #{transducerDescription,jdbcType=VARCHAR}
       )
   </insert>
@@ -99,10 +99,10 @@
         #{transducerId,jdbcType=VARCHAR},
       </if>
       <if test="transducerStatus != null">
-        #{transducerStatus,jdbcType=INTEGER},
+        #{transducerStatus,jdbcType=TINYINT},
       </if>
       <if test="transducerNowdata != null">
-        #{transducerNowdata,jdbcType=DOUBLE},
+        #{transducerNowdata,jdbcType=DECIMAL},
       </if>
       <if test="transducerUnit != null">
         #{transducerUnit,jdbcType=VARCHAR},
@@ -132,10 +132,10 @@
         transducer_id = #{transducerId,jdbcType=VARCHAR},
       </if>
       <if test="transducerStatus != null">
-        transducer_status = #{transducerStatus,jdbcType=INTEGER},
+        transducer_status = #{transducerStatus,jdbcType=TINYINT},
       </if>
       <if test="transducerNowdata != null">
-        transducer_nowdata = #{transducerNowdata,jdbcType=DOUBLE},
+        transducer_nowdata = #{transducerNowdata,jdbcType=DECIMAL},
       </if>
       <if test="transducerUnit != null">
         transducer_unit = #{transducerUnit,jdbcType=VARCHAR},
@@ -158,8 +158,8 @@
     set board_id = #{boardId,jdbcType=VARCHAR},
       transducer_type = #{transducerType,jdbcType=VARCHAR},
       transducer_id = #{transducerId,jdbcType=VARCHAR},
-      transducer_status = #{transducerStatus,jdbcType=INTEGER},
-      transducer_nowdata = #{transducerNowdata,jdbcType=DOUBLE},
+      transducer_status = #{transducerStatus,jdbcType=TINYINT},
+      transducer_nowdata = #{transducerNowdata,jdbcType=DECIMAL},
       transducer_unit = #{transducerUnit,jdbcType=VARCHAR},
       transducer_time = #{transducerTime,jdbcType=TIMESTAMP},
       transducer_description = #{transducerDescription,jdbcType=VARCHAR}

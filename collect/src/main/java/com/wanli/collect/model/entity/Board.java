@@ -1,6 +1,6 @@
 package com.wanli.collect.model.entity;
 
-import com.wanli.collect.model.constants.BoardStatusType;
+import com.wanli.collect.model.constants.DataStatusType;
 import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,7 +46,7 @@ public class Board {
      *
      * @mbg.generated
      */
-    private BoardStatusType boardStatus;
+    private DataStatusType boardStatus;
 
     /**
      *

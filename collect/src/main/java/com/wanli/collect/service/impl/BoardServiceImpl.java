@@ -1,10 +1,8 @@
 package com.wanli.collect.service.impl;
 
-import java.rmi.ServerError;
 import java.time.Instant;
-import java.util.List;
 
-import com.wanli.collect.model.constants.BoardStatusType;
+import com.wanli.collect.model.constants.DataStatusType;
 import org.springframework.stereotype.Service;
 
 import com.wanli.collect.context.RequestContext;
@@ -98,7 +96,7 @@ public class BoardServiceImpl implements BoardService {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
 
-        board.setBoardStatus(BoardStatusType.NORMAL);
+        board.setBoardStatus(DataStatusType.NORMAL);
         Instant now = Instant.now();
         Instant createTime = Instant.ofEpochSecond(now.getEpochSecond());
         board.setBoardTime(createTime);

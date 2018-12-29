@@ -9,7 +9,7 @@
     <id column="board_id" jdbcType="VARCHAR" property="boardId" />
     <result column="application_flag" jdbcType="VARCHAR" property="applicationFlag" />
     <result column="board_name" jdbcType="VARCHAR" property="boardName" />
-    <result column="board_status" jdbcType="INTEGER" property="boardStatus" />
+    <result column="board_status" jdbcType="TINYINT" property="boardStatus" />
     <result column="board_time" jdbcType="TIMESTAMP" property="boardTime" />
     <result column="board_description" jdbcType="VARCHAR" property="boardDescription" />
   </resultMap>
@@ -47,7 +47,7 @@
       board_status, board_time, board_description
       )
     values (#{boardId,jdbcType=VARCHAR}, #{applicationFlag,jdbcType=VARCHAR}, #{boardName,jdbcType=VARCHAR}, 
-      #{boardStatus,jdbcType=INTEGER}, #{boardTime,jdbcType=TIMESTAMP}, #{boardDescription,jdbcType=VARCHAR}
+      #{boardStatus,jdbcType=TINYINT}, #{boardTime,jdbcType=TIMESTAMP}, #{boardDescription,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wanli.collect.model.entity.Board">
@@ -87,7 +87,7 @@
         #{boardName,jdbcType=VARCHAR},
       </if>
       <if test="boardStatus != null">
-        #{boardStatus,jdbcType=INTEGER},
+        #{boardStatus,jdbcType=TINYINT},
       </if>
       <if test="boardTime != null">
         #{boardTime,jdbcType=TIMESTAMP},
@@ -111,7 +111,7 @@
         board_name = #{boardName,jdbcType=VARCHAR},
       </if>
       <if test="boardStatus != null">
-        board_status = #{boardStatus,jdbcType=INTEGER},
+        board_status = #{boardStatus,jdbcType=TINYINT},
       </if>
       <if test="boardTime != null">
         board_time = #{boardTime,jdbcType=TIMESTAMP},
@@ -130,7 +130,7 @@
     update board
     set application_flag = #{applicationFlag,jdbcType=VARCHAR},
       board_name = #{boardName,jdbcType=VARCHAR},
-      board_status = #{boardStatus,jdbcType=INTEGER},
+      board_status = #{boardStatus,jdbcType=TINYINT},
       board_time = #{boardTime,jdbcType=TIMESTAMP},
       board_description = #{boardDescription,jdbcType=VARCHAR}
     where board_id = #{boardId,jdbcType=VARCHAR}

@@ -176,7 +176,7 @@
 
             注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
          -->
-        <table tableName="board"
+        <table tableName="collect_data"
                enableCountByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" enableUpdateByExample="false">
 
@@ -257,7 +257,8 @@
                注意，一个table元素中可以有多个columnOverride元素哈~
              -->
             <columnOverride column="user_status" javaType="com.wanli.collect.model.constants.UserStatusType"/>
-            <columnOverride column="board_status" javaType="com.wanli.collect.model.constants.BoardStatusType"/>
+            <columnOverride column="board_status" javaType="com.wanli.collect.model.constants.DataStatusType"/>
+            <columnOverride column="transducer_status" javaType="com.wanli.collect.model.constants.DataStatusType"/>
             <columnOverride column="is_read" javaType="com.chuncongcong.task.model.constants.ReadType"/>
             <columnOverride column="role" javaType="com.chuncongcong.task.model.constants.RoleType" />
             <columnOverride column="gender" javaType="com.chuncongcong.task.model.constants.GenderType"/>

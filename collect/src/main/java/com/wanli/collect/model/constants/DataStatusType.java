@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @date 2018/12/27 10:13
  */
 
-public enum BoardStatusType {
+public enum DataStatusType {
 
     /**
      * 0.未知
@@ -32,7 +32,7 @@ public enum BoardStatusType {
 
     private String value;
 
-    BoardStatusType(String value) {
+    DataStatusType(String value) {
         this.value = value;
     }
 

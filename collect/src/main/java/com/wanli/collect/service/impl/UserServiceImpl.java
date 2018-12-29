@@ -98,7 +98,8 @@ public class UserServiceImpl implements UserService {
         }
 
         User newUser = new User();
-        BeanUtils.copyProperties(userDTO, newUser);
+        newUser.setUserUsername(userDTO.getUsername());
+        newUser.setUserPassword(userDTO.getPassword());
         //负责人创建子用户
         if(user.getUserStatus() == UserStatusType.CHARGE) {
 
@@ -122,6 +123,7 @@ public class UserServiceImpl implements UserService {
                 throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
             }
             checkUsername(userDTO.getUsername(), userDTO.getApplicationFlag());
+            newUser.setApplicationFlag(userDTO.getApplicationFlag());
             newUser.setUserStatus(UserStatusType.CHARGE);
             newUser.setFatherId(user.getUserId());
             userExtMapper.insert(newUser);

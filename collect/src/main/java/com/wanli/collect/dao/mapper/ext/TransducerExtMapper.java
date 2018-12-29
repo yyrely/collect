@@ -15,4 +15,16 @@ public interface TransducerExtMapper extends com.wanli.collect.dao.mapper.Transd
      * @return
      */
     List<Transducer> listTransducerByBoardId(@Param("boardId") String boardId);
+
+    /**
+     * 根据条件查询传感器
+     * @param boardId
+     * @param transducerType
+     * @param transducerId
+     * @return
+     */
+    Transducer findTransducer(
+            @Param("boardId") String boardId,
+            @Param("transducerType") String transducerType,
+            @Param("transducerId") String transducerId);
 }

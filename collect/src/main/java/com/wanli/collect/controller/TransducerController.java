@@ -1,10 +1,8 @@
 package com.wanli.collect.controller;
 
+import com.wanli.collect.model.dto.TransducerDTO;
 import com.wanli.collect.service.TransducerService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Hu
@@ -39,6 +37,27 @@ public class TransducerController {
     @GetMapping("/{transducerId}")
     public Object findTransducer(@PathVariable("transducerId") Long id) {
         return transducerService.findTransducerById(id);
+    }
+
+    /**
+     * 添加传感器
+     * @param transducerDTO
+     * @return
+     */
+    @PostMapping
+    public Object saveTransducer(@RequestBody TransducerDTO transducerDTO) {
+        return transducerService.saveTransducer(transducerDTO);
+    }
+
+    /**
+     * 删除传感器
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/{transducerId}")
+    public Object removeTransducer(@PathVariable("transducerId") Long id) {
+        //TODO 删除传感器未完成
+        return null;
     }
 
 

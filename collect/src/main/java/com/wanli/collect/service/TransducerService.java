@@ -1,5 +1,7 @@
 package com.wanli.collect.service;
 
+import com.wanli.collect.model.dto.TransducerDTO;
+
 /**
  * @author Hu
  * @date 2018/12/27 14:34
@@ -20,4 +22,11 @@ public interface TransducerService {
      * @return
      */
     Object findTransducerById(Long id);
+
+    /**
+     * 保存传感器
+     * @param transducerDTO
+     * @return
+     */
+    Object saveTransducer(TransducerDTO transducerDTO);
 }

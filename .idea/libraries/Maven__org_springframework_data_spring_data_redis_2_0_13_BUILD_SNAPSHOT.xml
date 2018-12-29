@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.springframework.data:spring-data-redis:2.0.13.BUILD-SNAPSHOT">
     <CLASSES>
-      <root url="jar://E:/maven/repository/org/springframework/data/spring-data-redis/2.0.13.BUILD-SNAPSHOT/spring-data-redis-2.0.13.BUILD-20181226.032724-36.jar!/" />
+      <root url="jar://E:/maven/repository/org/springframework/data/spring-data-redis/2.0.13.BUILD-SNAPSHOT/spring-data-redis-2.0.13.BUILD-20181228.033217-38.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://E:/maven/repository/org/springframework/data/spring-data-redis/2.0.13.BUILD-SNAPSHOT/spring-data-redis-2.0.13.BUILD-20181226.032724-36-javadoc.jar!/" />
+      <root url="jar://E:/maven/repository/org/springframework/data/spring-data-redis/2.0.13.BUILD-SNAPSHOT/spring-data-redis-2.0.13.BUILD-20181228.033217-38-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://E:/maven/repository/org/springframework/data/spring-data-redis/2.0.13.BUILD-SNAPSHOT/spring-data-redis-2.0.13.BUILD-20181226.032724-36-sources.jar!/" />
+      <root url="jar://E:/maven/repository/org/springframework/data/spring-data-redis/2.0.13.BUILD-SNAPSHOT/spring-data-redis-2.0.13.BUILD-20181228.033217-38-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -28,4 +28,20 @@
         FROM transducer
         WHERE board_id = #{boardId}
     </select>
+    <select id="findTransducer" resultMap="TransducerResultMap">
+        SELECT
+          id,
+          board_id,
+          transducer_type,
+          transducer_id,
+          transducer_status,
+          transducer_nowdata,
+          transducer_unit,
+          transducer_time,
+          transducer_description
+        FROM transducer
+        WHERE board_id = #{boardId}
+        and transducer_type = #{transducerType}
+        and transducer_id = #{transducerId}
+    </select>
 </mapper>

@@ -2,16 +2,24 @@ package com.wanli.collect.service.impl;
 
 import com.wanli.collect.context.RequestContext;
 import com.wanli.collect.dao.mapper.ext.BoardExtMapper;
+import com.wanli.collect.dao.mapper.ext.TransducerDataConfExtMapper;
 import com.wanli.collect.dao.mapper.ext.TransducerExtMapper;
 import com.wanli.collect.exception.BaseErrorCode;
 import com.wanli.collect.exception.ServiceException;
+import com.wanli.collect.model.constants.DataStatusType;
 import com.wanli.collect.model.constants.UserStatusType;
+import com.wanli.collect.model.dto.TransducerDTO;
 import com.wanli.collect.model.entity.Board;
 import com.wanli.collect.model.entity.Transducer;
+import com.wanli.collect.model.entity.TransducerDataConf;
 import com.wanli.collect.model.entity.User;
+import com.wanli.collect.model.vo.TransducerVO;
 import com.wanli.collect.service.TransducerService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -24,10 +32,14 @@ public class TransducerServiceImpl implements TransducerService {
 
     private final TransducerExtMapper transducerExtMapper;
     private final BoardExtMapper boardExtMapper;
+    private final TransducerDataConfExtMapper transducerDataConfExtMapper;
 
-    public TransducerServiceImpl(TransducerExtMapper transducerExtMapper, BoardExtMapper boardExtMapper) {
+
+
+    public TransducerServiceImpl(TransducerExtMapper transducerExtMapper, BoardExtMapper boardExtMapper, TransducerDataConfExtMapper transducerDataConfExtMapper) {
         this.transducerExtMapper = transducerExtMapper;
         this.boardExtMapper = boardExtMapper;
+        this.transducerDataConfExtMapper = transducerDataConfExtMapper;
     }
 
     @Override
@@ -63,6 +75,50 @@ public class TransducerServiceImpl implements TransducerService {
         }
 
         return transducer;
+    }
+
+    @Override
+    public Object saveTransducer(TransducerDTO transducerDTO) {
+
+        User user = RequestContext.getUserInfo();
+        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+
+        if(StringUtils.isEmpty(transducerDTO.getBoardId())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(StringUtils.isEmpty(transducerDTO.getTransducerType())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(StringUtils.isEmpty(transducerDTO.getTransducerId())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(StringUtils.isEmpty(transducerDTO.getTransducerUnit())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
+        Transducer transducer = transducerExtMapper.findTransducer(transducerDTO.getBoardId(), transducerDTO.getTransducerType(), transducerDTO.getTransducerId());
+        if(transducer != null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
+        transducer = new Transducer();
+        BeanUtils.copyProperties(transducerDTO, transducer);
+        transducer.setTransducerNowdata(BigDecimal.ZERO);
+        transducer.setTransducerStatus(DataStatusType.NORMAL);
+        transducerExtMapper.insert(transducer);
+
+        TransducerDataConf transducerDataConf = transducerDTO.getTransducerDataConf();
+        transducerDataConf.setBoardId(transducerDTO.getBoardId());
+        transducerDataConf.setTransducerType(transducerDTO.getTransducerType());
+        transducerDataConf.setTransducerId(transducerDTO.getTransducerId());
+        transducerDataConfExtMapper.insert(transducerDataConf);
+
+        TransducerVO transducerVO = new TransducerVO();
+        BeanUtils.copyProperties(transducer, transducerVO);
+        transducerVO.setTransducerDataConf(transducerDataConf);
+        return transducerVO;
     }
 }
 

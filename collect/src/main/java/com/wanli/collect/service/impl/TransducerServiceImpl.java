@@ -8,6 +8,7 @@ import com.wanli.collect.exception.BaseErrorCode;
 import com.wanli.collect.exception.ServiceException;
 import com.wanli.collect.model.constants.DataStatusType;
 import com.wanli.collect.model.constants.UserStatusType;
+import com.wanli.collect.model.domain.TransducerKeyBean;
 import com.wanli.collect.model.dto.TransducerDTO;
 import com.wanli.collect.model.entity.Board;
 import com.wanli.collect.model.entity.Transducer;
@@ -17,7 +18,9 @@ import com.wanli.collect.model.vo.TransducerVO;
 import com.wanli.collect.service.TransducerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import sun.awt.windows.ThemeReader;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -43,6 +46,7 @@ public class TransducerServiceImpl implements TransducerService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Object listTransducerByBoardId(String boardId) {
 
         User user = RequestContext.getUserInfo();
@@ -60,6 +64,7 @@ public class TransducerServiceImpl implements TransducerService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Object findTransducerById(Long id) {
 
         User user = RequestContext.getUserInfo();
@@ -78,6 +83,7 @@ public class TransducerServiceImpl implements TransducerService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Object saveTransducer(TransducerDTO transducerDTO) {
 
         User user = RequestContext.getUserInfo();
@@ -119,6 +125,32 @@ public class TransducerServiceImpl implements TransducerService {
         BeanUtils.copyProperties(transducer, transducerVO);
         transducerVO.setTransducerDataConf(transducerDataConf);
         return transducerVO;
+    }
+
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Object removeTransducer(Long id) {
+
+        User user = RequestContext.getUserInfo();
+        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+
+        Transducer transducer = transducerExtMapper.selectByPrimaryKey(id);
+        if(transducer == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
+        TransducerKeyBean transducerKeyBean = new TransducerKeyBean();
+        transducerKeyBean.setBoardId(transducer.getBoardId());
+        transducerKeyBean.setTransducerType(transducer.getTransducerType());
+        transducerKeyBean.setTransducerId(transducer.getTransducerId());
+
+        transducerDataConfExtMapper.removeTransducerDataConf(transducerKeyBean);
+        transducerExtMapper.deleteByPrimaryKey(id);
+
+        return null;
     }
 }
 

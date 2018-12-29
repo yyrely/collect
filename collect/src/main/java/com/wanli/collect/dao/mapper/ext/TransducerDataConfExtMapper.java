@@ -14,4 +14,17 @@ public interface TransducerDataConfExtMapper extends com.wanli.collect.dao.mappe
      * @return
      */
     TransducerDataConf findTransducerDataConf(@Param("transducerKeyBean") TransducerKeyBean transducerKeyBean);
+
+    /**
+     * 删除传感器配置
+     * @param transducerKeyBean
+     * @return
+     */
+    void removeTransducerDataConf(@Param("transducerKeyBean") TransducerKeyBean transducerKeyBean);
+
+    /**
+     * 根据板id删除传感器配置
+     * @param boardId
+     */
+    void removeTransducerDataConfByBoardId(String boardId);
 }

@@ -91,6 +91,11 @@ public class UserController {
         return userService.updateUser(userId, userDTO);
     }
 
+    /**
+     * 删除用户
+     * @param userId
+     * @return
+     */
     @DeleteMapping("/{userId}")
     public Object removeUser(@PathVariable("userId") Long userId) {
         return userService.removeUser(userId);

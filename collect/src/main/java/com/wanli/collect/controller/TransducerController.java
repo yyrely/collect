@@ -56,8 +56,7 @@ public class TransducerController {
      */
     @DeleteMapping("/{transducerId}")
     public Object removeTransducer(@PathVariable("transducerId") Long id) {
-        //TODO 删除传感器未完成
-        return null;
+        return transducerService.removeTransducer(id);
     }
 
 

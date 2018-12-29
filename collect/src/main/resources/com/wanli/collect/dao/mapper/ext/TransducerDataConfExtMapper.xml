@@ -15,6 +15,19 @@
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
         <result column="conf_description" jdbcType="VARCHAR" property="confDescription" />
     </resultMap>
+    <delete id="removeTransducerDataConf">
+        DELETE
+        FROM transducer_data_conf
+        WHERE board_id = #{transducerKeyBean.boardId}
+        and transducer_type = #{transducerKeyBean.transducerType}
+        and transducer_id = #{transducerKeyBean.transducerId}
+
+    </delete>
+    <delete id="removeTransducerDataConfByBoardId">
+         DELETE
+        FROM transducer_data_conf
+        WHERE board_id = #{transducerKeyBean.boardId}
+    </delete>
 
     <select id="findTransducerDataConf" resultMap="TransducerDataConfResultMap">
         SELECT

@@ -30,6 +30,12 @@ public class TransducerDataConfController {
         return transducerDataConfService.findTransducerDataConf(transducerKeyBean);
     }
 
+    /**
+     * 更新传感器配置
+     * @param id
+     * @param transducerDataConf
+     * @return
+     */
     @PutMapping("/{confId}")
     public Object updateTransducerDataConf(
             @PathVariable("confId") Long id,

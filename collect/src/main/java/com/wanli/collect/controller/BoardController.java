@@ -71,10 +71,14 @@ public class BoardController {
     }
 
 
+    /**
+     * 删除板
+     * @param boardId
+     * @return
+     */
     @DeleteMapping("/{boardId}")
     public Object removeBoard(@PathVariable("boardId") String boardId) {
-        //TODO 删除未做
-        return null;
+        return boardService.removeBoard(boardId);
     }
 
 

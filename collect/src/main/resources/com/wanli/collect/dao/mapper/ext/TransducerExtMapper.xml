@@ -13,6 +13,11 @@
         <result column="transducer_time" jdbcType="TIMESTAMP" property="transducerTime" />
         <result column="transducer_description" jdbcType="VARCHAR" property="transducerDescription" />
     </resultMap>
+    <delete id="removeTransducerByBoardId">
+        DELETE
+        FROM transducer
+        WHERE board_id = #{boardId}
+    </delete>
 
     <select id="listTransducerByBoardId" resultMap="TransducerResultMap">
         SELECT

@@ -22,6 +22,13 @@ public class CollectDataController {
         this.collectDataService = collectDataService;
     }
 
+    /**
+     * 获取传感器数据列表
+     * @param transducerKeyBean
+     * @param page
+     * @param size
+     * @return
+     */
     @GetMapping
     public Object listData(TransducerKeyBean transducerKeyBean,
                            @RequestParam(defaultValue = "1") Integer page,

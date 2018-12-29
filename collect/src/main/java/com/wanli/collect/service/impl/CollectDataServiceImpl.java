@@ -13,6 +13,7 @@ import com.wanli.collect.model.entity.CollectData;
 import com.wanli.collect.model.entity.User;
 import com.wanli.collect.service.CollectDataService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class CollectDataServiceImpl implements CollectDataService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Object listData(TransducerKeyBean transducerKeyBean, Integer page, Integer size) {
 
         User user = RequestContext.getUserInfo();

@@ -29,4 +29,11 @@ public interface TransducerService {
      * @return
      */
     Object saveTransducer(TransducerDTO transducerDTO);
+
+    /**
+     * 删除传感器
+     * @param id
+     * @return
+     */
+    Object removeTransducer(Long id);
 }

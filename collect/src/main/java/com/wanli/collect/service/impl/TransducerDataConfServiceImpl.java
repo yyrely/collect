@@ -11,6 +11,7 @@ import com.wanli.collect.model.domain.TransducerKeyBean;
 import com.wanli.collect.model.entity.TransducerDataConf;
 import com.wanli.collect.model.entity.User;
 import com.wanli.collect.service.TransducerDataConfService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 
@@ -29,12 +30,13 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Object findTransducerDataConf(TransducerKeyBean transducerKeyBean) {
-
         return transducerDataConfExtMapper.findTransducerDataConf(transducerKeyBean);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Object updateTransducerDataConf(Long id, TransducerDataConf transducerDataConf) {
 
         User user = RequestContext.getUserInfo();

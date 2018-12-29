@@ -44,4 +44,11 @@ public interface BoardService {
      * @return
      */
     Object updateBoard(String boardId, Board board);
+
+    /**
+     * 删除板
+     * @param boardId
+     * @return
+     */
+    Object removeBoard(String boardId);
 }

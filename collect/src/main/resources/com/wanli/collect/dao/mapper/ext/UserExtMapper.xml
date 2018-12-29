@@ -23,6 +23,11 @@
             <result property="applicationName" column="application_name"/>
         </association>
     </resultMap>
+    <delete id="removeAllUserByApplicationFlag">
+        DELETE
+        FROM user
+        WHERE application_flag = #{applicationFlag}
+    </delete>
 
     <select id="findUserByUsernameAndFlag" resultMap="UserResultMap">
         SELECT

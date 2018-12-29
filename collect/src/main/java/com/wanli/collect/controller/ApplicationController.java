@@ -75,6 +75,10 @@ public class ApplicationController {
         return applicationService.updateApplication(applicationId, application);
     }
 
+    /**
+     * 获取应用标识列表
+     * @return
+     */
     @GetMapping("/flags")
     public Object listApplicationFlags() {
         return applicationService.listApplicationFlags();
@@ -87,8 +91,8 @@ public class ApplicationController {
      */
     @DeleteMapping("/{applicationId}")
     public Object removeApplication(@PathVariable("applicationId") Long applicationId) {
-        //TODO 删除应用待完成
-        return null;
+
+        return applicationService.removeApplication(applicationId);
     }
 
 

@@ -2,6 +2,8 @@ package com.wanli.collect.service.impl;
 
 import java.time.Instant;
 
+import com.wanli.collect.dao.mapper.ext.TransducerDataConfExtMapper;
+import com.wanli.collect.dao.mapper.ext.TransducerExtMapper;
 import com.wanli.collect.model.constants.DataStatusType;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +27,13 @@ import org.springframework.util.StringUtils;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardExtMapper boardExtMapper;
+    private final TransducerExtMapper transducerExtMapper;
+    private final TransducerDataConfExtMapper transducerDataConfExtMapper;
 
-    public BoardServiceImpl(BoardExtMapper boardExtMapper) {
+    public BoardServiceImpl(BoardExtMapper boardExtMapper, TransducerExtMapper transducerExtMapper, TransducerDataConfExtMapper transducerDataConfExtMapper) {
         this.boardExtMapper = boardExtMapper;
+        this.transducerExtMapper = transducerExtMapper;
+        this.transducerDataConfExtMapper = transducerDataConfExtMapper;
     }
 
     @Override
@@ -81,6 +87,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Object saveBoard(Board board) {
 
         User user = RequestContext.getUserInfo();
@@ -106,6 +113,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Object updateBoard(String boardId, Board board) {
 
         User user = RequestContext.getUserInfo();
@@ -128,6 +136,26 @@ public class BoardServiceImpl implements BoardService {
                                                         .boardId(boardId)
                                                         .boardName(board.getBoardName())
                                                         .build());
+        return null;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Object removeBoard(String boardId) {
+
+        User user = RequestContext.getUserInfo();
+        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+
+        Board board = boardExtMapper.selectByPrimaryKey(boardId);
+        if(board == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
+        transducerDataConfExtMapper.removeTransducerDataConfByBoardId(boardId);
+        transducerExtMapper.removeTransducerByBoardId(boardId);
+        boardExtMapper.deleteByPrimaryKey(boardId);
 
         return null;
     }

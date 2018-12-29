@@ -27,4 +27,10 @@ public interface TransducerExtMapper extends com.wanli.collect.dao.mapper.Transd
             @Param("boardId") String boardId,
             @Param("transducerType") String transducerType,
             @Param("transducerId") String transducerId);
+
+    /**
+     * 根据板id删除传感器
+     * @param boardId
+     */
+    void removeTransducerByBoardId(String boardId);
 }

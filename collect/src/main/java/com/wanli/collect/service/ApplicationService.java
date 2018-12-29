@@ -52,4 +52,11 @@ public interface ApplicationService {
      * @return
      */
     Object listApplicationFlags();
+
+    /**
+     * 删除应用
+     * @param applicationId
+     * @return
+     */
+    Object removeApplication(Long applicationId);
 }

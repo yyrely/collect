@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ab4e7b83-4d49-4828-ad61-2f00fc1c41d2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/UserExtMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/UserExtMapper.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/collect/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -59,7 +57,7 @@
         <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="462">
-              <caret line="90" column="32" selection-start-line="90" selection-start-column="32" selection-end-line="90" selection-end-column="32" />
+              <caret line="90" column="30" selection-start-line="90" selection-start-column="30" selection-end-line="90" selection-end-column="30" />
               <folding>
                 <element signature="e#1131#1132#0" expanded="true" />
                 <element signature="e#1183#1184#0" expanded="true" />
@@ -82,8 +80,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/UserServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="240" column="56" lean-forward="true" selection-start-line="240" selection-start-column="56" selection-end-line="240" selection-end-column="56" />
+            <state relative-caret-position="216">
+              <caret line="276" selection-start-line="276" selection-end-line="276" />
             </state>
           </provider>
         </entry>
@@ -101,7 +99,7 @@
         <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/UserExtMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="694">
-              <caret line="66" column="13" lean-forward="true" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
+              <caret line="66" column="13" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -334,7 +332,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546069594062" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546414929139" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../old_collect" />
@@ -389,7 +387,7 @@
       <workItem from="1545397747638" duration="9819000" />
       <workItem from="1545702401170" duration="1462000" />
       <workItem from="1545703890217" duration="57107000" />
-      <workItem from="1546046684886" duration="15026000" />
+      <workItem from="1546046684886" duration="16847000" />
     </task>
     <task id="LOCAL-00001" summary="add user api">
       <created>1545731651995</created>
@@ -482,11 +480,18 @@
       <option name="project" value="LOCAL" />
       <updated>1546067079697</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="用户模块修复bug">
+      <created>1546069757892</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1546069757892</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85976000" />
+    <option name="totallyTimeSpent" value="87797000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -498,7 +503,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="1358" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Web" order="0" side_tool="true" />
@@ -591,7 +596,8 @@
     <MESSAGE value="传感器模块ok（删除未做）" />
     <MESSAGE value="传感器配置模块加数据ok" />
     <MESSAGE value="各个模块的删除功能完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="各个模块的删除功能完成" />
+    <MESSAGE value="用户模块修复bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="用户模块修复bug" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -999,14 +1005,14 @@
     <entry file="file://$PROJECT_DIR$/collect/src/main/resources/com/wanli/collect/dao/mapper/ext/UserExtMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="694">
-          <caret line="66" column="13" lean-forward="true" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
+          <caret line="66" column="13" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
-          <caret line="90" column="32" selection-start-line="90" selection-start-column="32" selection-end-line="90" selection-end-column="32" />
+          <caret line="90" column="30" selection-start-line="90" selection-start-column="30" selection-end-line="90" selection-end-column="30" />
           <folding>
             <element signature="e#1131#1132#0" expanded="true" />
             <element signature="e#1183#1184#0" expanded="true" />
@@ -1025,8 +1031,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/collect/src/main/java/com/wanli/collect/service/impl/UserServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="240" column="56" lean-forward="true" selection-start-line="240" selection-start-column="56" selection-end-line="240" selection-end-column="56" />
+        <state relative-caret-position="216">
+          <caret line="276" selection-start-line="276" selection-end-line="276" />
         </state>
       </provider>
     </entry>

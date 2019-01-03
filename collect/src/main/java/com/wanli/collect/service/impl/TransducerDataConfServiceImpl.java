@@ -1,5 +1,6 @@
 package com.wanli.collect.service.impl;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.wanli.collect.context.RequestContext;
@@ -65,9 +66,9 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
 
-        transducerDataConf.setId(id);
-        transducerDataConf.setUpdateTime(Instant.now());
-        transducerDataConfExtMapper.insertSelective(transducerDataConf);
+        BeanUtils.copyProperties(transducerDataConf,transducerDataConfInfo);
+        transducerDataConfInfo.setUpdateTime(Instant.now());
+        transducerDataConfExtMapper.insertSelective(transducerDataConfInfo);
 
         return null;
     }

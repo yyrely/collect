@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/datas")
+@RequestMapping("/transducers/datas")
 public class CollectDataController {
 
     private final CollectDataService collectDataService;
@@ -31,8 +31,8 @@ public class CollectDataController {
      */
     @GetMapping
     public Object listData(TransducerKeyBean transducerKeyBean,
-                           @RequestParam(defaultValue = "1") Integer page,
-                           @RequestParam(defaultValue = "10") Integer size) {
+                           @RequestParam(value = "page", defaultValue = "1") Integer page,
+                           @RequestParam(value = "size", defaultValue = "10") Integer size) {
 
         return collectDataService.listData(transducerKeyBean, page ,size);
     }

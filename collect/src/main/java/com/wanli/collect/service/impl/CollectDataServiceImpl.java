@@ -7,6 +7,7 @@ import com.wanli.collect.dao.mapper.ext.BoardExtMapper;
 import com.wanli.collect.dao.mapper.ext.CollectDataExtMapper;
 import com.wanli.collect.exception.BaseErrorCode;
 import com.wanli.collect.exception.ServiceException;
+import com.wanli.collect.model.constants.UserStatusType;
 import com.wanli.collect.model.domain.TransducerKeyBean;
 import com.wanli.collect.model.entity.Board;
 import com.wanli.collect.model.entity.CollectData;
@@ -52,7 +53,7 @@ public class CollectDataServiceImpl implements CollectDataService {
         }
 
         Board board = boardExtMapper.selectByPrimaryKey(transducerKeyBean.getBoardId());
-        if(!user.getApplicationFlag().equals(board.getApplicationFlag())) {
+        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER && !user.getApplicationFlag().equals(board.getApplicationFlag())) {
            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
 

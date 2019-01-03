@@ -24,8 +24,8 @@ public class BoardController {
      * @param applicationFlag
      * @return
      */
-    @GetMapping("/applications/{flag}")
-    public Object listBoardByFlag(@PathVariable("flag") String applicationFlag) {
+    @GetMapping
+    public Object listBoardByFlag(@RequestParam("applicationFlag") String applicationFlag) {
         return boardService.listBoardByFlag(applicationFlag);
     }
 

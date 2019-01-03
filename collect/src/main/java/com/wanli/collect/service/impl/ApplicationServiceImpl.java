@@ -57,7 +57,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 
         User user = RequestContext.getUserInfo();
 
-        if(!user.getApplicationFlag().equals(applicationFlag)) {
+        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER && !user.getApplicationFlag().equals(applicationFlag)) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
 

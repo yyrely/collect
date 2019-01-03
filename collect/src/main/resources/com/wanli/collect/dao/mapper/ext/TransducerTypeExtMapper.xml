@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wanli.collect.dao.mapper.ext.TransducerTypeExtMapper">
-  
+
+    <resultMap id="TransducerTypeResultMap" type="com.wanli.collect.model.entity.TransducerType">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="transducer_type" jdbcType="VARCHAR" property="transducerType" />
+        <result column="transducer_unit" jdbcType="VARCHAR" property="transducerUnit" />
+    </resultMap>
+
+    <select id="listTransducerType" resultMap="TransducerTypeResultMap">
+        SELECT
+          id,
+          transducer_type,
+          transducer_unit
+        FROM transducer_type
+    </select>
+    <select id="findByType" resultMap="TransducerTypeResultMap">
+        SELECT
+          id,
+          transducer_type,
+          transducer_unit
+        FROM transducer_type
+        WHERE transducer_type = #{transducerType}
+    </select>
 </mapper>

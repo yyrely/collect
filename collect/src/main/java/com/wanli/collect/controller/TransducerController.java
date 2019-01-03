@@ -50,6 +50,17 @@ public class TransducerController {
     }
 
     /**
+     * 更新传感器
+     * @param
+     * @return
+     */
+    @PutMapping("/{transducerId}")
+    public Object saveTransducer(@PathVariable("transducerId") Long id,
+                                @RequestBody TransducerDTO transducerDTO) {
+        return transducerService.updateTransducer(id,transducerDTO);
+    }
+
+    /**
      * 删除传感器
      * @param id
      * @return

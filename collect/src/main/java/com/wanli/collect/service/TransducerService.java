@@ -30,6 +30,15 @@ public interface TransducerService {
      */
     Object saveTransducer(TransducerDTO transducerDTO);
 
+
+    /**
+     * 更新传感器
+     * @param id
+     * @param transducerDTO
+     * @return
+     */
+    Object updateTransducer(Long id, TransducerDTO transducerDTO);
+
     /**
      * 删除传感器
      * @param id

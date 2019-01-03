@@ -133,10 +133,12 @@ public class ApplicationServiceImpl implements ApplicationService {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
 
+
         applicationExtMapper.updateByPrimaryKeySelective(Application.builder()
                                                                     .applicationId(applicationId)
                                                                     .applicationName(application.getApplicationName())
-                                                                    .applicationCompany(application.getApplicationCompany()).build());
+                                                                    .applicationCompany(application.getApplicationCompany())
+                                                                    .applicationDescription(application.getApplicationDescription()).build());
         return null;
     }
 

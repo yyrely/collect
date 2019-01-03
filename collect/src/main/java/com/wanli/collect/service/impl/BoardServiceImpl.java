@@ -135,6 +135,7 @@ public class BoardServiceImpl implements BoardService {
         boardExtMapper.updateByPrimaryKeySelective(Board.builder()
                                                         .boardId(boardId)
                                                         .boardName(board.getBoardName())
+                                                        .boardDescription(board.getBoardDescription())
                                                         .build());
         return null;
     }

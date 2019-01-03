@@ -75,7 +75,7 @@ public class TransducerServiceImpl implements TransducerService {
         }
 
         Board board = boardExtMapper.selectByPrimaryKey(transducer.getBoardId());
-        if(!user.getApplicationFlag().equals(board.getApplicationFlag())) {
+        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER && !user.getApplicationFlag().equals(board.getApplicationFlag())) {
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
 
@@ -127,6 +127,26 @@ public class TransducerServiceImpl implements TransducerService {
         return transducerVO;
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Object updateTransducer(Long id, TransducerDTO transducerDTO) {
+
+        User user = RequestContext.getUserInfo();
+        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+        if(id == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        Transducer transducer = transducerExtMapper.selectByPrimaryKey(id);
+        if(transducer == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
+        transducer.setTransducerDescription(transducerDTO.getTransducerDescription());
+        transducerExtMapper.updateByPrimaryKeySelective(transducer);
+        return null;
+    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)

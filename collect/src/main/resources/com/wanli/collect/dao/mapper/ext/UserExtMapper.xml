@@ -46,6 +46,7 @@
           user_id,
           father_id,
           user_username,
+          user_password,
           user_status,
           application_flag
         FROM user

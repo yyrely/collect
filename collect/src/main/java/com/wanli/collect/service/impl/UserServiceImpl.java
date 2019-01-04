@@ -183,7 +183,7 @@ public class UserServiceImpl implements UserService {
 
         //负责人子用户列表
         if(user.getUserStatus() == UserStatusType.CHARGE) {
-            return userExtMapper.listUsersByFatherId(user.getFatherId());
+            return userExtMapper.listUsersByFatherId(user.getUserId());
         }
 
         //总管理下的负责人列表(多返回应用信息)

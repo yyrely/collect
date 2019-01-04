@@ -1,8 +1,5 @@
 package com.wanli.collect.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import com.wanli.collect.model.dto.UserDTO;

@@ -97,29 +97,35 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
 
+        if(StringUtils.isEmpty(userDTO.getUsername())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
+        if(StringUtils.isEmpty(userDTO.getPassword())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
         User newUser = new User();
+
+
         newUser.setUserUsername(userDTO.getUsername());
         newUser.setUserPassword(userDTO.getPassword());
         //负责人创建子用户
         if(user.getUserStatus() == UserStatusType.CHARGE) {
 
-            if(StringUtils.isEmpty(userDTO.getUsername())) {
-                throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
-            }
             checkUsername(userDTO.getUsername(), user.getApplicationFlag());
 
             newUser.setApplicationFlag(user.getApplicationFlag());
             newUser.setFatherId(user.getUserId());
             newUser.setUserStatus(UserStatusType.NORMAL);
             userExtMapper.insert(newUser);
-            newUser.setUserPassword(null);
             return newUser;
         }
 
         //总管理创建负责人
         if(user.getUserStatus() == UserStatusType.GENERAL_MANAGER) {
 
-            if(StringUtils.isEmpty(userDTO.getUsername()) || StringUtils.isEmpty(user.getApplicationFlag())) {
+            if(StringUtils.isEmpty(user.getApplicationFlag())) {
                 throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
             }
             checkUsername(userDTO.getUsername(), userDTO.getApplicationFlag());
@@ -127,7 +133,6 @@ public class UserServiceImpl implements UserService {
             newUser.setUserStatus(UserStatusType.CHARGE);
             newUser.setFatherId(user.getUserId());
             userExtMapper.insert(newUser);
-            newUser.setUserPassword(null);
             return newUser;
         }
 

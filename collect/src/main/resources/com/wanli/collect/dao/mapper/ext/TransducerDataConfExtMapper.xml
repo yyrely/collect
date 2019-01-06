@@ -4,7 +4,7 @@
 
     <resultMap id="TransducerDataConfResultMap" type="com.wanli.collect.model.entity.TransducerDataConf">
         <id column="id" jdbcType="BIGINT" property="id" />
-        <result column="application_flag" javaType="VARCHAR" property="applicationFlag"/>
+        <result column="application_flag" jdbcType="VARCHAR" property="applicationFlag"/>
         <result column="board_id" jdbcType="VARCHAR" property="boardId" />
         <result column="transducer_type" jdbcType="VARCHAR" property="transducerType" />
         <result column="transducer_id" jdbcType="VARCHAR" property="transducerId" />

@@ -2,6 +2,7 @@ package com.wanli.collect.dao;
 
 import java.sql.SQLException;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 /**
  * Create By HU
@@ -9,5 +10,5 @@ import java.time.Instant;
  */
 
 public interface BoardDao {
-    void updateBoard(String boardId, int status, Instant now) throws SQLException;
+    void updateBoard(String boardId, byte status, LocalDateTime now) throws SQLException;
 }

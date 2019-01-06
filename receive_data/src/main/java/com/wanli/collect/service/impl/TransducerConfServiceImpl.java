@@ -1,5 +1,6 @@
 package com.wanli.collect.service.impl;
 
+import com.wanli.collect.constants.Constant;
 import com.wanli.collect.dao.TransducerConfDao;
 import com.wanli.collect.dao.impl.TransducerConfDaoImpl;
 import com.wanli.collect.entity.TransducerConf;
@@ -32,14 +33,14 @@ public class TransducerConfServiceImpl implements TransducerConfService {
         TransducerConf transducerConf = null;
         try {
             //从redis中取传感器配置
-            String json = jedisClient.hget("TransducerDataConf",boardId+":"+transducerType+":"+transducerId);
+            String json = jedisClient.hget(Constant.TRANSDUCER_CONF,boardId+":"+transducerType+":"+transducerId);
             //将取出的json转为传感器配置对象
             //判读是否为空
             if(json == null || json.equals("")) {
                 //从数据库中取传感器配置对象
                 transducerConf = transducerConfDao.getTransducerDataConf(boardId,transducerType,transducerId);
                 //写入到redis中去
-                jedisClient.hset("TransducerDataConf",boardId+":"+transducerType+":"+transducerId, JsonUtils.objectToJson(transducerConf));
+                jedisClient.hset(Constant.TRANSDUCER_CONF,boardId+":"+transducerType+":"+transducerId, JsonUtils.objectToJson(transducerConf));
             }else {
                 transducerConf = JsonUtils.jsonToPojo(json, TransducerConf.class);
             }

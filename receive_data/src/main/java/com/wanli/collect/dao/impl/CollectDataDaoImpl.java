@@ -21,6 +21,14 @@ public class CollectDataDaoImpl implements CollectDataDao {
     @Override
     public void addData(CollectData data) throws SQLException {
         QueryRunner qr = new QueryRunner();
-        qr.update(DruidUtils.getConnection(),"insert into data(board_id,transducer_id,transducer_type,transducer_data,data_time) values(?,?,?,?,?)",data.getBoardId(),data.getTransducerId(),data.getTransducerType(),data.getTransducerData(),data.getDataTime());
+        String sql = "insert into collect_data" +
+                "(board_id,transducer_id,transducer_type,transducer_data,data_time)" +
+                " values(?,?,?,?,?)";
+        qr.update(DruidUtils.getConnection(),sql,
+                data.getBoardId(),
+                data.getTransducerId(),
+                data.getTransducerType(),
+                data.getTransducerData(),
+                data.getDataTime());
     }
 }

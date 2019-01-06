@@ -2,8 +2,8 @@ package com.wanli.collect.entity;
 
 import lombok.Data;
 
-import java.time.Instant;
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * Create By HU
@@ -21,9 +21,9 @@ public class Transducer {
 
     private String transducerId;
 
-    private Integer transducerStatus;
+    private Byte transducerStatus;
 
-    private Double transducerNowdata;
+    private BigDecimal transducerNowdata;
 
-    private Instant transducerTime;
+    private LocalDateTime transducerTime;
 }

@@ -2,7 +2,8 @@ package com.wanli.collect.entity;
 
 import lombok.Data;
 
-import java.time.Instant;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * Create By HU
@@ -18,7 +19,7 @@ public class CollectData {
 
     private String transducerType;
 
-    private Double transducerData;
+    private BigDecimal transducerData;
 
-    private Instant dataTime;
+    private LocalDateTime dataTime;
 }

@@ -2,6 +2,7 @@ package com.wanli.collect.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wanli.collect.model.constants.Contants;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -80,7 +81,7 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
         //更新Redis中配置信息
         String key = transducerDataConfInfo.getBoardId()+ ":" +transducerDataConfInfo.getTransducerType()+ ":" +transducerDataConfInfo.getTransducerId();
         String value = objectMapper.writeValueAsString(transducerDataConfInfo);
-        redisTemplate.opsForHash().put("TransducerDataConf", key, value);
+        redisTemplate.opsForHash().put(Contants.TRANSDUCER_CONF, key, value);
 
         return null;
     }

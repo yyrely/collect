@@ -5,7 +5,7 @@ import com.wanli.collect.utils.DruidUtils;
 import org.apache.commons.dbutils.QueryRunner;
 
 import java.sql.SQLException;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 /**
  * Create By HU
@@ -19,9 +19,13 @@ public class BoardDaoImpl implements BoardDao {
     public static BoardDao getINSTANCE(){ return INSTANCE;}
 
     @Override
-    public void updateBoard(String boardId, int status, Instant date) throws SQLException {
+    public void updateBoard(String boardId, byte status, LocalDateTime date) throws SQLException {
         QueryRunner query = new QueryRunner();
-        String sql = "update board set board_status = ?,board_time = ?  where board_id = ?";
-        query.update(DruidUtils.getConnection(),sql,status,date,boardId);
+        String sql = "update board set" +
+                " board_status = ?," +
+                "board_time = ? " +
+                "where board_id = ?";
+        query.update(DruidUtils.getConnection(),sql,status, date, boardId);
     }
+
 }

@@ -1,6 +1,9 @@
 package com.wanli.collect.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.wanli.collect.context.RequestContext;
@@ -25,9 +28,13 @@ import java.time.Instant;
 public class TransducerDataConfServiceImpl implements TransducerDataConfService {
 
     private final TransducerDataConfExtMapper transducerDataConfExtMapper;
+    private final StringRedisTemplate redisTemplate;
+    private final ObjectMapper objectMapper;
 
-    public TransducerDataConfServiceImpl(TransducerDataConfExtMapper transducerDataConfExtMapper) {
+    public TransducerDataConfServiceImpl(TransducerDataConfExtMapper transducerDataConfExtMapper, StringRedisTemplate redisTemplate, ObjectMapper objectMapper) {
         this.transducerDataConfExtMapper = transducerDataConfExtMapper;
+        this.redisTemplate = redisTemplate;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -38,7 +45,7 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Object updateTransducerDataConf(Long id, TransducerDataConf transducerDataConf) {
+    public Object updateTransducerDataConf(Long id, TransducerDataConf transducerDataConf) throws JsonProcessingException {
 
         User user = RequestContext.getUserInfo();
         if(user.getUserStatus() == UserStatusType.NORMAL) {
@@ -68,7 +75,12 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
 
         BeanUtils.copyProperties(transducerDataConf,transducerDataConfInfo);
         transducerDataConfInfo.setUpdateTime(Instant.now());
-        transducerDataConfExtMapper.insertSelective(transducerDataConfInfo);
+        transducerDataConfExtMapper.updateByPrimaryKeySelective(transducerDataConfInfo);
+
+        //更新Redis中配置信息
+        String key = transducerDataConfInfo.getBoardId()+ ":" +transducerDataConfInfo.getTransducerType()+ ":" +transducerDataConfInfo.getTransducerId();
+        String value = objectMapper.writeValueAsString(transducerDataConfInfo);
+        redisTemplate.opsForHash().put("TransducerDataConf", key, value);
 
         return null;
     }

@@ -4,6 +4,7 @@
 
     <resultMap id="TransducerDataConfResultMap" type="com.wanli.collect.model.entity.TransducerDataConf">
         <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="application_flag" javaType="VARCHAR" property="applicationFlag"/>
         <result column="board_id" jdbcType="VARCHAR" property="boardId" />
         <result column="transducer_type" jdbcType="VARCHAR" property="transducerType" />
         <result column="transducer_id" jdbcType="VARCHAR" property="transducerId" />
@@ -21,10 +22,9 @@
         WHERE board_id = #{transducerKeyBean.boardId}
         and transducer_type = #{transducerKeyBean.transducerType}
         and transducer_id = #{transducerKeyBean.transducerId}
-
     </delete>
     <delete id="removeTransducerDataConfByBoardId">
-         DELETE
+        DELETE
         FROM transducer_data_conf
         WHERE board_id = #{transducerKeyBean.boardId}
     </delete>

@@ -91,6 +91,9 @@ public class TransducerServiceImpl implements TransducerService {
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
 
+        if(StringUtils.isEmpty(transducerDTO.getTransducerDataConf().getApplicationFlag())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
         if(StringUtils.isEmpty(transducerDTO.getBoardId())) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }

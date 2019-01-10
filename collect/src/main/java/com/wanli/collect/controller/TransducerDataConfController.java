@@ -1,5 +1,6 @@
 package com.wanli.collect.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.wanli.collect.model.domain.TransducerKeyBean;
 import com.wanli.collect.model.entity.TransducerDataConf;
 import com.wanli.collect.service.TransducerDataConfService;
@@ -39,7 +40,7 @@ public class TransducerDataConfController {
     @PutMapping("/{confId}")
     public Object updateTransducerDataConf(
             @PathVariable("confId") Long id,
-            @RequestBody TransducerDataConf transducerDataConf){
+            @RequestBody TransducerDataConf transducerDataConf) throws Exception {
         return transducerDataConfService.updateTransducerDataConf(id, transducerDataConf);
     }
 

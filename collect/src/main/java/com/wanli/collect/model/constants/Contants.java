@@ -17,4 +17,9 @@ public class Contants {
      */
     public static final String ONLINE_TOKEN = "ONLINE_TOKEN_";
 
+    /**
+     * 传感器配置在redis中map的大key
+     */
+    public static final String TRANSDUCER_CONF = "TRANSDUCER_CONF";
+
 }

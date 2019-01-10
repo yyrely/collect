@@ -1,5 +1,6 @@
 package com.wanli.collect.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.wanli.collect.model.domain.TransducerKeyBean;
 import com.wanli.collect.model.entity.TransducerDataConf;
 
@@ -23,5 +24,5 @@ public interface TransducerDataConfService {
      * @param transducerDataConf
      * @return
      */
-    Object updateTransducerDataConf(Long id, TransducerDataConf transducerDataConf);
+    Object updateTransducerDataConf(Long id, TransducerDataConf transducerDataConf) throws JsonProcessingException;
 }

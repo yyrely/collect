@@ -19,7 +19,7 @@ public class Client {
                     try {
                         DatagramSocket datagramSocket = new DatagramSocket();
                         //准备数据，把数据封装到数据包中。
-                        String data = Thread.currentThread().getName() + "-msg.";
+                        String data = "A3";
                         //创建了一个数据包
                         DatagramPacket packet = new DatagramPacket(data.getBytes(), data.getBytes().length, InetAddress.getLocalHost() , 1234);
                         //调用udp的服务发送数据包

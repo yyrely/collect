@@ -21,6 +21,6 @@
           board_description
         FROM board
         WHERE application_flag = #{applicationFlag}
-        ORDER BY board_status DESC
+        ORDER BY board_status,board_time DESC
     </select>
 </mapper>

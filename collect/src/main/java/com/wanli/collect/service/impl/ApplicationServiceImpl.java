@@ -169,7 +169,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 
         List<Board> boards = boardExtMapper.listBoardByFlag(application.getApplicationFlag());
         boards.forEach(b -> boardService.removeBoard(b.getBoardId()));
-        userExtMapper.removeAllUserByApplicationFlag(application.getApplicationFlag());
+        //userExtMapper.removeAllUserByApplicationFlag(application.getApplicationFlag());
         applicationExtMapper.deleteByPrimaryKey(applicationId);
 
         return null;

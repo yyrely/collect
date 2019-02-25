@@ -37,8 +37,15 @@ public interface UserExtMapper extends com.wanli.collect.dao.mapper.UserMapper {
     List<UserVO> listChargeUsers(@Param("status") UserStatusType status);
 
     /**
-     *
+     * 根据应用id删除所有用户信息
      * @param applicationFlag
      */
     void removeAllUserByApplicationFlag(String applicationFlag);
+
+    /**
+     * 根据应用id获取所有用户信息
+     * @param applicationFlag
+     * @return
+     */
+    List<User> listUsersByApplicationFlag(String applicationFlag);
 }

@@ -1,8 +1,10 @@
 package com.wanli.collect.service.impl;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import ch.qos.logback.core.joran.conditional.ElseAction;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -247,12 +249,7 @@ public class UserServiceImpl implements UserService {
         userExtMapper.updateByPrimaryKeySelective(userInfo);
 
         //修改密码的用户退出登录
-        String token = redisTemplate.opsForValue().get(Contants.ONLINE_USER + userInfo.getApplicationFlag() + userInfo.getUserUsername());
-        if(!StringUtils.isEmpty(token)) {
-            redisTemplate.expire(Contants.ONLINE_USER + userInfo.getApplicationFlag() + userInfo.getUserUsername(), 0, TimeUnit.SECONDS);
-            redisTemplate.expire(Contants.ONLINE_TOKEN + token, 0, TimeUnit.SECONDS);
-        }
-
+        delToken(userInfo);
         return null;
     }
 
@@ -271,11 +268,26 @@ public class UserServiceImpl implements UserService {
         if(!userInfo.getFatherId().equals(user.getUserId())) {
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
-
-        userExtMapper.deleteByPrimaryKey(userId);
-
+        //总管理
+        if(user.getUserStatus() == UserStatusType.GENERAL_MANAGER) {
+            List<User> userList = userExtMapper.listUsersByApplicationFlag(userInfo.getApplicationFlag());
+            userExtMapper.removeAllUserByApplicationFlag(userInfo.getApplicationFlag());
+            userList.forEach(this::delToken);
+        }else if (user.getUserStatus() == UserStatusType.CHARGE) {
+            userExtMapper.deleteByPrimaryKey(userId);
+            delToken(userInfo);
+        }
         return null;
     }
+
+    private void delToken(User user) {
+        String token = redisTemplate.opsForValue().get(Contants.ONLINE_USER + user.getApplicationFlag() + user.getUserUsername());
+        if(!StringUtils.isEmpty(token)) {
+            redisTemplate.expire(Contants.ONLINE_USER + user.getApplicationFlag() + user.getUserUsername(), 0, TimeUnit.SECONDS);
+            redisTemplate.expire(Contants.ONLINE_TOKEN + token, 0, TimeUnit.SECONDS);
+        }
+    }
+
 }
 
 

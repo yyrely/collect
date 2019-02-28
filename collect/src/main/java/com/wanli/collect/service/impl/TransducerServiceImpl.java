@@ -109,7 +109,7 @@ public class TransducerServiceImpl implements TransducerService {
 
         Transducer transducer = transducerExtMapper.findTransducer(transducerDTO.getBoardId(), transducerDTO.getTransducerType(), transducerDTO.getTransducerId());
         if(transducer != null) {
-            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+            throw new ServiceException(BaseErrorCode.TRANSDUCER_EXIST);
         }
 
         transducer = new Transducer();

@@ -39,7 +39,7 @@ public class BaseErrorCode implements ErrorCode{
 
     public static final ErrorCode LOGIN_ILLEGAL = new BaseErrorCode(52, 200, "login illegal");
 
-    public static final ErrorCode SIGN_ERROR = new BaseErrorCode(54, 200, "sign error");
+    public static final ErrorCode TRANSDUCER_EXIST = new BaseErrorCode(54, 200, "transducer exist");
 
     public static final ErrorCode MAKE_ILLEGAL = new BaseErrorCode(55,200,"make illegal");
 

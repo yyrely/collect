@@ -22,17 +22,24 @@ public class TransducerConfDaoImpl implements TransducerConfDao {
     @Override
     public TransducerConf getTransducerDataConf(String boardId, String transducerType, String transducerId) throws SQLException {
         QueryRunner query = new QueryRunner();
-        String sql = "select " +
-                "application_flag applicationFlag," +
-                "transducer_max transducerMax," +
-                "transducer_min transducerMin," +
-                "transducer_errornum transducerErrornum," +
-                "transducer_level transducerLevel," +
-                "transducer_warntime transducerWarntime " +
-                "from transducer_data_conf " +
-                "where board_id = ? " +
-                "and transducer_type = ? " +
-                "and transducer_id = ?";
+        String sql = "SELECT\n" +
+                "\tid,\n" +
+                "\tapplication_flag applicationFlag,\n" +
+                "\tboard_id boardId,\n" +
+                "\ttransducer_type transducerType,\n" +
+                "\ttransducer_id transducerId,\n" +
+                "\ttransducer_max transducerMax,\n" +
+                "\ttransducer_min transducerMin,\n" +
+                "\ttransducer_errornum transducerErrornum,\n" +
+                "\ttransducer_level transducerLevel,\n" +
+                "\ttransducer_warntime transducerWarntime,\n" +
+                "\tconf_description confDescription \n" +
+                "FROM\n" +
+                "\ttransducer_data_conf \n" +
+                "WHERE\n" +
+                "\tboard_id = ?\n" +
+                "\tAND transducer_type = ?\n" +
+                "\tAND transducer_id = ?;";
         return query.query(DruidUtils.getConnection(), sql, new BeanHandler<>(TransducerConf.class),boardId,transducerType,transducerId);
     }
 }

@@ -75,13 +75,18 @@ public class DataServiceImpl implements DataService {
             }
 
             TransducerConf transducerDataConf = transducerConfService.getTransducerConf(boardId,analysisType, transducerId);
+
+            if(transducerDataConf == null) {
+                throw new RuntimeException("传感器配置不存在");
+            }
+
             // 从redis中取出对应的时间
             String time = jedisClient.get(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + transducerType + ":" + transducerId);
             // 判断是否在容错范围内
             if (((transducerDataConf.getTransducerLevel().subtract(transducerDataConf.getTransducerErrornum())).compareTo(analysisData) == -1)
                     && ((transducerDataConf.getTransducerLevel().add(transducerDataConf.getTransducerErrornum())).compareTo(analysisData) == 1)) {
                 // 判断时间是否为空
-                if (time == null || time.equals("")) {
+                if (time == null || "".equals(time)) {
 
                     saveAndUpdate(boardId, transducerId, analysisType, analysisData, status);
 
@@ -106,7 +111,7 @@ public class DataServiceImpl implements DataService {
                 saveAndUpdate(boardId, transducerId, analysisType, analysisData, status);
 
                 // 判断时间标识是否为空
-                if (time == null || time.equals("")) {
+                if (time == null || "".equals(time)) {
                     // 空则在redis中设置时间标识,并设置过期时间
                     jedisClient.set(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + transducerType + ":" + transducerId, "time");
                     jedisClient.expire(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + transducerType + ":" + transducerId,

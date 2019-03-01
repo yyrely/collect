@@ -49,7 +49,6 @@ public class Server {
 
                     String crc = StringUtils.getCRC(StringUtils.hexStringToBytes(msg.substring(0, msg.length() - 4)));
                     if ((crc.toUpperCase()).equals(StringUtils.convertCRC(msg).toUpperCase()) && "01".equals(actionNum) && "06".equals(dataLength)) {
-
                         //调用服务层方法，处理数据
                         dataService.save(msg);
                         log.info("data receive success: {}" , msg);

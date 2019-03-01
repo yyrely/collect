@@ -3,6 +3,7 @@ package com.wanli.collect.server;
 import com.wanli.collect.service.DataService;
 import com.wanli.collect.service.impl.DataServiceImpl;
 import com.wanli.collect.utils.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -13,6 +14,7 @@ import java.util.concurrent.*;
  * Date 2019/1/5 14:23
  */
 
+@Slf4j
 public class Server {
 
     //线程池创建
@@ -40,7 +42,7 @@ public class Server {
                     if(msg == null || "".equals(msg)) {
                         throw new RuntimeException("数据为空");
                     }
-
+                    log.info("receive data : {}" , msg);
                     //校验数据
                     String actionNum = msg.substring(4, 6);
                     String dataLength = msg.substring(6, 8);
@@ -50,10 +52,9 @@ public class Server {
 
                         //调用服务层方法，处理数据
                         dataService.save(msg);
-
+                        log.info("data receive success: {}" , msg);
                     } else {
-
-                        System.out.println("格式不正确的数据:"+StringUtils.bytesToHexString(data));
+                        log.info("data format error : {}" , msg);
                     }
 
                 });

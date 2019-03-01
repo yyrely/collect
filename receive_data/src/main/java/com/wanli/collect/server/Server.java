@@ -3,7 +3,6 @@ package com.wanli.collect.server;
 import com.wanli.collect.service.DataService;
 import com.wanli.collect.service.impl.DataServiceImpl;
 import com.wanli.collect.utils.StringUtils;
-import lombok.extern.slf4j.Slf4j;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -14,7 +13,6 @@ import java.util.concurrent.*;
  * Date 2019/1/5 14:23
  */
 
-@Slf4j
 public class Server {
 
     //线程池创建

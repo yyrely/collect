@@ -24,5 +24,8 @@ public interface TransducerDataConfService {
      * @param transducerDataConf
      * @return
      */
-    Object updateTransducerDataConf(Long id, TransducerDataConf transducerDataConf) throws JsonProcessingException;
+    Object updateTransducerDataConf(Long id, TransducerDataConf transducerDataConf) throws Exception;
+
+
+    Object updateTransducerDataConfByThree(TransducerDataConf transducerDataConf) throws Exception;
 }

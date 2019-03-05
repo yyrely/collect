@@ -44,5 +44,12 @@ public class TransducerDataConfController {
         return transducerDataConfService.updateTransducerDataConf(id, transducerDataConf);
     }
 
+    @PutMapping
+    public Object updateTransducerDataConf(@RequestBody TransducerDataConf transducerDataConf) throws Exception {
+        return transducerDataConfService.updateTransducerDataConfByThree(transducerDataConf);
+    }
+
+
+
 }
 

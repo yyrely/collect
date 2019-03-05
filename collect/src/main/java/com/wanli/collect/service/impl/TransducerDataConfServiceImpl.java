@@ -1,24 +1,24 @@
 package com.wanli.collect.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wanli.collect.model.constants.Contants;
+import java.time.Instant;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wanli.collect.context.RequestContext;
 import com.wanli.collect.dao.mapper.ext.TransducerDataConfExtMapper;
 import com.wanli.collect.exception.BaseErrorCode;
 import com.wanli.collect.exception.ServiceException;
+import com.wanli.collect.model.constants.Contants;
 import com.wanli.collect.model.constants.UserStatusType;
 import com.wanli.collect.model.domain.TransducerKeyBean;
 import com.wanli.collect.model.entity.TransducerDataConf;
 import com.wanli.collect.model.entity.User;
 import com.wanli.collect.service.TransducerDataConfService;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
 
 /**
  * @author Hu
@@ -46,7 +46,7 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Object updateTransducerDataConf(Long id, TransducerDataConf transducerDataConf) throws JsonProcessingException {
+    public Object updateTransducerDataConf(Long id, TransducerDataConf transducerDataConf) throws Exception {
 
         User user = RequestContext.getUserInfo();
         if(user.getUserStatus() == UserStatusType.NORMAL) {
@@ -70,6 +70,58 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
         }
 
         TransducerDataConf transducerDataConfInfo = transducerDataConfExtMapper.selectByPrimaryKey(id);
+        if(transducerDataConfInfo == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
+        BeanUtils.copyProperties(transducerDataConf,transducerDataConfInfo);
+        transducerDataConfInfo.setUpdateTime(Instant.now());
+        transducerDataConfExtMapper.updateByPrimaryKeySelective(transducerDataConfInfo);
+
+        //更新Redis中配置信息
+        String key = transducerDataConfInfo.getBoardId()+ ":" +transducerDataConfInfo.getTransducerType()+ ":" +transducerDataConfInfo.getTransducerId();
+        String value = objectMapper.writeValueAsString(transducerDataConfInfo);
+        redisTemplate.opsForHash().put(Contants.TRANSDUCER_CONF, key, value);
+
+        return null;
+    }
+
+    @Override
+    public Object updateTransducerDataConfByThree(TransducerDataConf transducerDataConf) throws Exception {
+        User user = RequestContext.getUserInfo();
+        if(user.getUserStatus() == UserStatusType.NORMAL) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+        if(StringUtils.isEmpty(transducerDataConf.getBoardId())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(StringUtils.isEmpty(transducerDataConf.getTransducerType())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(StringUtils.isEmpty(transducerDataConf.getTransducerId())) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(transducerDataConf.getTransducerMax() == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(transducerDataConf.getTransducerMin() == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(transducerDataConf.getTransducerErrornum() == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(transducerDataConf.getTransducerLevel() == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(transducerDataConf.getTransducerWarntime() == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        TransducerKeyBean transducerKeyBean = new TransducerKeyBean();
+        transducerKeyBean.setBoardId(transducerDataConf.getBoardId());
+        transducerKeyBean.setTransducerType(transducerDataConf.getTransducerType());
+        transducerKeyBean.setTransducerId(transducerDataConf.getTransducerId());
+        TransducerDataConf transducerDataConfInfo = transducerDataConfExtMapper.findTransducerDataConf(transducerKeyBean);
+
         if(transducerDataConfInfo == null) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }

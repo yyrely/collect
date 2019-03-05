@@ -117,7 +117,7 @@ public class BoardServiceImpl implements BoardService {
     public Object updateBoard(String boardId, Board board) {
 
         User user = RequestContext.getUserInfo();
-        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER) {
+        if(user.getUserStatus() == UserStatusType.NORMAL) {
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
 
@@ -130,6 +130,9 @@ public class BoardServiceImpl implements BoardService {
         Board boardInfo = boardExtMapper.selectByPrimaryKey(boardId);
         if(boardInfo == null) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(user.getUserStatus() == UserStatusType.CHARGE && !user.getApplicationFlag().equals(boardInfo.getApplicationFlag())) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
 
         boardExtMapper.updateByPrimaryKeySelective(Board.builder()

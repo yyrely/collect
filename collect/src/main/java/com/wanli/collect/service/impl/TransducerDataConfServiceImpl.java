@@ -73,7 +73,9 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
         if(transducerDataConfInfo == null) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
-
+        if(user.getUserStatus() == UserStatusType.CHARGE && !user.getApplicationFlag().equals(transducerDataConfInfo.getApplicationFlag())) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
         BeanUtils.copyProperties(transducerDataConf,transducerDataConfInfo);
         transducerDataConfInfo.setUpdateTime(Instant.now());
         transducerDataConfExtMapper.updateByPrimaryKeySelective(transducerDataConfInfo);
@@ -125,7 +127,9 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
         if(transducerDataConfInfo == null) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
-
+        if(user.getUserStatus() == UserStatusType.CHARGE && !user.getApplicationFlag().equals(transducerDataConfInfo.getApplicationFlag())) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
         BeanUtils.copyProperties(transducerDataConf,transducerDataConfInfo);
         transducerDataConfInfo.setUpdateTime(Instant.now());
         transducerDataConfExtMapper.updateByPrimaryKeySelective(transducerDataConfInfo);

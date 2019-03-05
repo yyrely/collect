@@ -116,7 +116,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     public Object updateApplication(Long applicationId, Application application) {
 
         User user = RequestContext.getUserInfo();
-        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER) {
+        if(user.getUserStatus() == UserStatusType.NORMAL) {
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
         if(applicationId == null) {
@@ -133,12 +133,27 @@ public class ApplicationServiceImpl implements ApplicationService {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
 
+        if(user.getUserStatus() == UserStatusType.CHARGE && !user.getApplicationFlag().equals(applicationInfo.getApplicationFlag())) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+        Application updateApplication = new Application();
+        if(user.getUserStatus() == UserStatusType.CHARGE && user.getApplicationFlag().equals(applicationInfo.getApplicationFlag())) {
+            updateApplication = Application.builder()
+                    .applicationId(applicationId)
+                    .applicationName(application.getApplicationName())
+                    .applicationDescription(application.getApplicationDescription()).build();
+        }
 
-        applicationExtMapper.updateByPrimaryKeySelective(Application.builder()
-                                                                    .applicationId(applicationId)
-                                                                    .applicationName(application.getApplicationName())
-                                                                    .applicationCompany(application.getApplicationCompany())
-                                                                    .applicationDescription(application.getApplicationDescription()).build());
+        if(user.getUserStatus() == UserStatusType.GENERAL_MANAGER) {
+            updateApplication = Application.builder()
+                    .applicationId(applicationId)
+                    .applicationCompany(application.getApplicationCompany())
+                    .applicationName(application.getApplicationName())
+                    .applicationDescription(application.getApplicationDescription()).build();
+        }
+
+        applicationExtMapper.updateByPrimaryKeySelective(updateApplication);
+
         return null;
     }
 

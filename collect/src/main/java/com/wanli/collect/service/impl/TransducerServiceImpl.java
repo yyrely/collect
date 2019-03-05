@@ -135,15 +135,23 @@ public class TransducerServiceImpl implements TransducerService {
     public Object updateTransducer(Long id, TransducerDTO transducerDTO) {
 
         User user = RequestContext.getUserInfo();
-        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER) {
+        if(user.getUserStatus() == UserStatusType.NORMAL) {
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
         if(id == null) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
+
         Transducer transducer = transducerExtMapper.selectByPrimaryKey(id);
+
         if(transducer == null) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
+        Board board = boardExtMapper.selectByPrimaryKey(transducer.getBoardId());
+
+        if(user.getUserStatus() == UserStatusType.CHARGE && !user.getApplicationFlag().equals(board.getApplicationFlag())) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
 
         transducer.setTransducerDescription(transducerDTO.getTransducerDescription());

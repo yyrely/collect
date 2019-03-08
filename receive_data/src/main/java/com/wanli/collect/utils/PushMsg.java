@@ -27,7 +27,6 @@ import java.util.Map;
 public class PushMsg {
 
     protected static final Logger LOG = LoggerFactory.getLogger(PushMsg.class);
-
     protected static final String APP_KEY ="f8146df72f1c70473f316064";
     protected static final String MASTER_SECRET = "08d0664b7463d33abe3a8642";
 

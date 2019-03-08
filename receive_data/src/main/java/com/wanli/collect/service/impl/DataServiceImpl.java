@@ -105,7 +105,7 @@ public class DataServiceImpl implements DataService {
                 // 判断是否过低
                 if (transducerDataConf.getTransducerMin().compareTo(analysisData) == 1) {
                     PushMsg.testSendPush(analysisType.substring(0, 2) + Constant.LOW_PUSH_MSG, transducerDataConf.getApplicationFlag());
-                    status = 1;
+                    status = 3;
                 }
 
                 saveAndUpdate(boardId, transducerId, analysisType, analysisData, status);

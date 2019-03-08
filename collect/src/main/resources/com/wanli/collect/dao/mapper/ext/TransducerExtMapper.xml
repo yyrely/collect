@@ -32,6 +32,7 @@
           transducer_description
         FROM transducer
         WHERE board_id = #{boardId}
+        order by transducer_status desc, transducer_time desc
     </select>
     <select id="findTransducer" resultMap="TransducerResultMap">
         SELECT

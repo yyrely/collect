@@ -34,6 +34,7 @@
         <if test="applicationName!=null and applicationName!=''">
             where application_name like  "%"#{applicationName}"%"
         </if>
+        order by application_time desc;
 
     </select>
     <select id="listApplicationFlags" resultMap="ApplicationResultMap">

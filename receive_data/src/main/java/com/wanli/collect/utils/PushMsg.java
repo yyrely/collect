@@ -26,15 +26,15 @@ import java.util.Map;
 
 public class PushMsg {
 
-    protected static final Logger LOG = LoggerFactory.getLogger(PushMsg.class);
-    protected static final String APP_KEY ="f8146df72f1c70473f316064";
-    protected static final String MASTER_SECRET = "08d0664b7463d33abe3a8642";
+    private static final Logger LOG = LoggerFactory.getLogger(PushMsg.class);
+    private static final String APP_KEY ="f8146df72f1c70473f316064";
+    private static final String MASTER_SECRET = "08d0664b7463d33abe3a8642";
 
     public static void testSendPush(String msg,String applicationFlag) {
         ClientConfig clientConfig = ClientConfig.getInstance();
         final JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, clientConfig);
 
-        final PushPayload payload = buildPushObject_all_alias_alert(msg,applicationFlag);
+        final PushPayload payload = buildPushObject(msg,applicationFlag);
         try {
             PushResult result = jpushClient.sendPush(payload);
             LOG.info("Got result - " + result);
@@ -96,11 +96,16 @@ public class PushMsg {
                 .build();
     }
 
-    public static PushPayload buildPushObject_all_alias_alert(String msg,String applicationFlag) {
+    private static PushPayload buildPushObject(String msg,String applicationFlag) {
         return PushPayload.newBuilder()
                 .setPlatform(Platform.all())
                 .setAudience(Audience.tag(applicationFlag))
-                .setNotification(Notification.alert(msg))
+                .setNotification(Notification.newBuilder()
+                        .addPlatformNotification(IosNotification.newBuilder()
+                            .autoBadge()
+                            .setAlert(msg)
+                            .build())
+                        .build())
                 .build();
     }
 }

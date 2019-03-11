@@ -81,8 +81,20 @@ public class ApplicationServiceImpl implements ApplicationService {
 
         PageHelper.startPage(page,size);
         List<Application> applications = applicationExtMapper.listApplication(applicationName);
-        PageInfo<Application> pageInfo = new PageInfo<>(applications);
-        return pageInfo;
+        return new PageInfo<>(applications);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    public Object allListApplication() {
+
+        User user = RequestContext.getUserInfo();
+
+        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+
+        return applicationExtMapper.listApplication(null);
     }
 
     @Override
@@ -168,6 +180,8 @@ public class ApplicationServiceImpl implements ApplicationService {
 
         return applicationExtMapper.listApplicationFlags();
     }
+
+
 
     @Override
     @Transactional(rollbackFor = Exception.class)

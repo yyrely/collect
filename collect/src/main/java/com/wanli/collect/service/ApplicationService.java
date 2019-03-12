@@ -24,7 +24,7 @@ public interface ApplicationService {
     Object findApplication(String applicationFlag);
 
     /**
-     * 获取应用列表
+     * 分页获取应用列表
      * @param page
      * @param size
      * @param applicationName
@@ -59,4 +59,10 @@ public interface ApplicationService {
      * @return
      */
     Object removeApplication(Long applicationId);
+
+    /**
+     * 获取所有应用
+     * @return
+     */
+    Object allListApplication();
 }

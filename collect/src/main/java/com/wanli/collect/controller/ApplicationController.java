@@ -1,5 +1,6 @@
 package com.wanli.collect.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wanli.collect.model.entity.Application;
 import com.wanli.collect.service.ApplicationService;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class ApplicationController {
     }
 
     /**
-     * 管理员获取应用列表
+     * 管理员分页获取应用列表
      * @param page
      * @param size
      * @param applicationName
@@ -52,6 +53,18 @@ public class ApplicationController {
                                   @RequestParam(value = "applicationName", defaultValue = "") String applicationName) {
         return applicationService.listApplication(page, size, applicationName);
     }
+
+    /**
+     * 管理员获取所有应用列表
+     * @return
+     */
+    @GetMapping("/all")
+    public Object allListApplication() {
+        return applicationService.allListApplication();
+    }
+
+
+
 
     /**
      * 添加应用

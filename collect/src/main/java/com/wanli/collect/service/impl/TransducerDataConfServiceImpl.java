@@ -53,22 +53,6 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
 
-        if(transducerDataConf.getTransducerMax() == null) {
-            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
-        }
-        if(transducerDataConf.getTransducerMin() == null) {
-            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
-        }
-        if(transducerDataConf.getTransducerErrornum() == null) {
-            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
-        }
-        if(transducerDataConf.getTransducerLevel() == null) {
-            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
-        }
-        if(transducerDataConf.getTransducerWarntime() == null) {
-            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
-        }
-
         TransducerDataConf transducerDataConfInfo = transducerDataConfExtMapper.selectByPrimaryKey(id);
         if(transducerDataConfInfo == null) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
@@ -76,7 +60,23 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
         if(user.getUserStatus() == UserStatusType.CHARGE && !user.getApplicationFlag().equals(transducerDataConfInfo.getApplicationFlag())) {
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
-        BeanUtils.copyProperties(transducerDataConf,transducerDataConfInfo);
+
+        if(transducerDataConf.getTransducerMax() != null) {
+            transducerDataConfInfo.setTransducerMax(transducerDataConf.getTransducerMax());
+        }
+        if(transducerDataConf.getTransducerMin() != null) {
+            transducerDataConfInfo.setTransducerMin(transducerDataConf.getTransducerMin());
+        }
+        if(transducerDataConf.getTransducerErrornum() != null) {
+            transducerDataConfInfo.setTransducerErrornum(transducerDataConf.getTransducerErrornum());
+        }
+        if(transducerDataConf.getTransducerLevel() != null) {
+            transducerDataConfInfo.setTransducerLevel(transducerDataConf.getTransducerLevel());
+        }
+        if(transducerDataConf.getTransducerWarntime() != null) {
+            transducerDataConfInfo.setTransducerWarntime(transducerDataConf.getTransducerWarntime());
+        }
+
         transducerDataConfInfo.setUpdateTime(Instant.now());
         transducerDataConfExtMapper.updateByPrimaryKeySelective(transducerDataConfInfo);
 

@@ -57,6 +57,7 @@
           u.user_id,
           u.father_id,
           u.user_username,
+          u.user_password,
           u.user_status,
           u.application_flag,
           a.application_id,

@@ -26,6 +26,4 @@ public interface TransducerDataConfService {
      */
     Object updateTransducerDataConf(Long id, TransducerDataConf transducerDataConf) throws Exception;
 
-
-    Object updateTransducerDataConfByThree(TransducerDataConf transducerDataConf) throws Exception;
 }

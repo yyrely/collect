@@ -22,4 +22,9 @@ public class Contants {
      */
     public static final String TRANSDUCER_CONF = "TRANSDUCER_CONF";
 
+    /**
+     * 传感器多久记录在Redis中的标志
+     */
+    public static final String TRANSDUCER_WARN_TIME_PRE = "WARN_TIME";
+
 }

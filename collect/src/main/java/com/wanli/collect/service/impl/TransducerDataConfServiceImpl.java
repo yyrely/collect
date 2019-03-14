@@ -94,9 +94,9 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
         Transducer transducer = transducerExtMapper.findTransducer(transducerDataConfInfo.getBoardId(), transducerDataConfInfo.getTransducerType(), transducerDataConfInfo.getTransducerId());
         DataStatusType status;
         if(transducer.getTransducerNowdata().compareTo(transducerDataConfInfo.getTransducerMax()) == 1) {
-            status = DataStatusType.LOW;
-        }else if(transducer.getTransducerNowdata().compareTo(transducerDataConfInfo.getTransducerMax()) == -1) {
             status = DataStatusType.HIGH;
+        }else if(transducer.getTransducerNowdata().compareTo(transducerDataConfInfo.getTransducerMin()) == -1) {
+            status = DataStatusType.LOW;
         }else {
             status = DataStatusType.NORMAL;
         }

@@ -1,8 +1,10 @@
 package com.wanli.collect.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.util.List;
 
@@ -14,7 +16,14 @@ import java.util.List;
 public class JsonUtils {
 
     // 定义jackson对象
-    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static ObjectMapper MAPPER;
+
+    static {
+        MAPPER = new ObjectMapper();
+        JavaTimeModule javaTimeModule = new JavaTimeModule();
+        MAPPER.registerModule(javaTimeModule);
+        MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
 
     /**
      * 将对象转换成json字符串。

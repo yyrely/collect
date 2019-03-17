@@ -3,6 +3,7 @@ package com.wanli.collect.entity;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 /**
@@ -33,5 +34,5 @@ public class TransducerConf {
 
     private Integer transducerWarntime;
 
-    private LocalDateTime updateTime;
+    private Instant updateTime;
 }

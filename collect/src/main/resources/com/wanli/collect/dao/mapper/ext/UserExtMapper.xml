@@ -67,7 +67,7 @@
         ON u.application_flag = a.application_flag
         WHERE u.user_status = #{status}
     </select>
-    <select id="listUsersByApplicationFlag" resultType="com.wanli.collect.model.entity.User">
+    <select id="listUsersByApplicationFlag" resultMap="UserResultMap">
         SELECT
           user_id,
           father_id,
@@ -75,7 +75,7 @@
           user_password,
           user_status,
           application_flag
-        FROM user
+        FROM info_collect.user
         WHERE application_flag = #{applicationFlag}
     </select>
 </mapper>

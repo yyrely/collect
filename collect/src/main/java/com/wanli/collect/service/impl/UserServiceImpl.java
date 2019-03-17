@@ -271,8 +271,10 @@ public class UserServiceImpl implements UserService {
         //总管理
         if(user.getUserStatus() == UserStatusType.GENERAL_MANAGER) {
             List<User> userList = userExtMapper.listUsersByApplicationFlag(userInfo.getApplicationFlag());
-            userExtMapper.removeAllUserByApplicationFlag(userInfo.getApplicationFlag());
-            userList.forEach(this::delToken);
+            if(userList != null && userList.size() != 0) {
+                userExtMapper.removeAllUserByApplicationFlag(userInfo.getApplicationFlag());
+                userList.forEach(this::delToken);
+            }
         }else if (user.getUserStatus() == UserStatusType.CHARGE) {
             userExtMapper.deleteByPrimaryKey(userId);
             delToken(userInfo);

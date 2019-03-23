@@ -36,4 +36,15 @@ public class CollectDataController {
 
         return collectDataService.listData(transducerKeyBean, page ,size);
     }
+
+    /**
+     * 获取总页数
+     * @param transducerKeyBean
+     * @param size
+     * @return
+     */
+    @GetMapping("/total/page")
+    public Object totalPage(TransducerKeyBean transducerKeyBean,@RequestParam(value = "size", defaultValue = "10") Integer size) {
+        return collectDataService.totalPage(transducerKeyBean,size);
+    }
 }

@@ -1,9 +1,12 @@
 package com.wanli.collect.controller;
 
+import com.wanli.collect.model.entity.User;
 import org.springframework.web.bind.annotation.*;
 
 import com.wanli.collect.model.dto.UserDTO;
 import com.wanli.collect.service.UserService;
+
+import java.util.List;
 
 /**
  * @author Hu
@@ -32,8 +35,9 @@ public class UserController {
      * @throws Exception
      */
     @PostMapping("/login")
-    public Object login(@RequestBody UserDTO userDTO) throws Exception {
-        return userService.login(userDTO);
+    public List<User> login(@RequestBody UserDTO userDTO) throws Exception {
+        userService.login(userDTO);
+        return null;
     }
 
     /**

@@ -17,4 +17,12 @@ public interface CollectDataService {
      * @return
      */
     Object listData(TransducerKeyBean transducerKeyBean, Integer page, Integer size);
+
+    /**
+     * 获取总页数
+     * @param transducerKeyBean
+     * @param size
+     * @return
+     */
+    Object totalPage(TransducerKeyBean transducerKeyBean, Integer size);
 }

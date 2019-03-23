@@ -16,7 +16,9 @@ import com.wanli.collect.service.CollectDataService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Hu
@@ -63,6 +65,33 @@ public class CollectDataServiceImpl implements CollectDataService {
         PageInfo<CollectData> pageInfo = new PageInfo<>(collectDataList);
 
         return pageInfo;
+    }
+
+    @Override
+    public Object totalPage(TransducerKeyBean transducerKeyBean, Integer size) {
+        User user = RequestContext.getUserInfo();
+        if(transducerKeyBean == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(transducerKeyBean.getBoardId() == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(transducerKeyBean.getTransducerType() == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+        if(transducerKeyBean.getTransducerId() == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
+
+        Board board = boardExtMapper.selectByPrimaryKey(transducerKeyBean.getBoardId());
+        if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER && !user.getApplicationFlag().equals(board.getApplicationFlag())) {
+            throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+        }
+
+        List<CollectData> collectDataList = collectDataExtMapper.listData(transducerKeyBean);
+        Map<String, Integer> result = new HashMap<>();
+        result.put("totalPage",collectDataList.size()/size + 1);
+        return result;
     }
 }
 

@@ -35,9 +35,8 @@ public class UserController {
      * @throws Exception
      */
     @PostMapping("/login")
-    public List<User> login(@RequestBody UserDTO userDTO) throws Exception {
-        userService.login(userDTO);
-        return null;
+    public Object login(@RequestBody UserDTO userDTO) throws Exception {
+        return userService.login(userDTO);
     }
 
     /**

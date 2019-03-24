@@ -1,10 +1,18 @@
 package com.wanli.collect.service.impl;
 
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-
-import ch.qos.logback.core.joran.conditional.ElseAction;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wanli.collect.context.RequestContext;
+import com.wanli.collect.dao.mapper.ext.ApplicationExtMapper;
+import com.wanli.collect.dao.mapper.ext.UserExtMapper;
+import com.wanli.collect.exception.BaseErrorCode;
+import com.wanli.collect.exception.ServiceException;
+import com.wanli.collect.model.constants.Contants;
+import com.wanli.collect.model.constants.UserStatusType;
+import com.wanli.collect.model.dto.UserDTO;
+import com.wanli.collect.model.entity.Application;
+import com.wanli.collect.model.entity.User;
+import com.wanli.collect.model.vo.UserVO;
+import com.wanli.collect.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -12,17 +20,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wanli.collect.context.RequestContext;
-import com.wanli.collect.dao.mapper.ext.UserExtMapper;
-import com.wanli.collect.exception.BaseErrorCode;
-import com.wanli.collect.exception.ServiceException;
-import com.wanli.collect.model.constants.Contants;
-import com.wanli.collect.model.constants.UserStatusType;
-import com.wanli.collect.model.dto.UserDTO;
-import com.wanli.collect.model.entity.User;
-import com.wanli.collect.model.vo.UserVO;
-import com.wanli.collect.service.UserService;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Hu
@@ -39,11 +39,13 @@ public class UserServiceImpl implements UserService {
     private final ObjectMapper objectMapper;
     private final UserExtMapper userExtMapper;
     private final StringRedisTemplate redisTemplate;
+    private final ApplicationExtMapper applicationExtMapper;
 
-    public UserServiceImpl(ObjectMapper objectMapper, UserExtMapper userExtMapper, StringRedisTemplate redisTemplate) {
+    public UserServiceImpl(ObjectMapper objectMapper, UserExtMapper userExtMapper, StringRedisTemplate redisTemplate, ApplicationExtMapper applicationExtMapper) {
         this.objectMapper = objectMapper;
         this.userExtMapper = userExtMapper;
         this.redisTemplate = redisTemplate;
+        this.applicationExtMapper = applicationExtMapper;
     }
 
     @Override
@@ -127,10 +129,12 @@ public class UserServiceImpl implements UserService {
         //总管理创建负责人
         if(user.getUserStatus() == UserStatusType.GENERAL_MANAGER) {
 
-            if(StringUtils.isEmpty(user.getApplicationFlag())) {
+            if(StringUtils.isEmpty(userDTO.getApplicationFlag())) {
                 throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
             }
+            checkApplication(userDTO.getApplicationFlag());
             checkUsername(userDTO.getUsername(), userDTO.getApplicationFlag());
+
             newUser.setApplicationFlag(userDTO.getApplicationFlag());
             newUser.setUserStatus(UserStatusType.CHARGE);
             newUser.setFatherId(user.getUserId());
@@ -139,6 +143,13 @@ public class UserServiceImpl implements UserService {
         }
 
         throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
+    }
+
+    private void checkApplication(String applicationFlag) {
+        Application applicationByFlag = applicationExtMapper.findApplicationByFlag(applicationFlag);
+        if(applicationByFlag == null) {
+            throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
+        }
     }
 
     @Transactional(rollbackFor = Exception.class, readOnly = true)

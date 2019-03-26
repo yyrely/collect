@@ -16,6 +16,7 @@ import com.wanli.collect.utils.DruidUtils;
 import com.wanli.collect.utils.PushMsg;
 import com.wanli.collect.utils.jedis.JedisClient;
 import com.wanli.collect.utils.jedis.JedisClientPool;
+import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -26,6 +27,7 @@ import java.time.LocalDateTime;
  * Date 2019/1/5 14:48
  */
 
+@Slf4j
 public class DataServiceImpl implements DataService {
 
     private JedisClient jedisClient = JedisClientPool.getINSTANCE();
@@ -126,6 +128,7 @@ public class DataServiceImpl implements DataService {
             // 事务提交
             DruidUtils.commit();
         }catch (Exception e) {
+            log.info("have error : {}",e.getMessage());
             DruidUtils.rollback();
         }finally {
             DruidUtils.close();

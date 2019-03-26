@@ -26,7 +26,7 @@ public class Server {
 
         try {
             DatagramSocket socket = new DatagramSocket(1234);
-            byte[] container = new byte[24];
+            byte[] container = new byte[12];
 
             while (true) {
                 DatagramPacket packet = new DatagramPacket(container,container.length);
@@ -37,8 +37,8 @@ public class Server {
 
                     //接收数据
                     byte[] data = packet.getData();
-                    String msg = new String(data);
-                    //String msg = StringUtils.bytesToHexString(data);
+                    //String msg = new String(data);
+                    String msg = StringUtils.bytesToHexString(data);
                     if(msg == null || "".equals(msg)) {
                         throw new RuntimeException("数据为空");
                     }

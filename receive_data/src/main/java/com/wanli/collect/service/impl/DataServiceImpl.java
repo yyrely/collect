@@ -121,7 +121,7 @@ public class DataServiceImpl implements DataService {
             }
 
             // 从redis中取出对应的时间
-            String time = jedisClient.get(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + transducerType + ":" + transducerId);
+            String time = jedisClient.get(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + analysisType + ":" + transducerId);
             // 判断是否在容错范围内
             if (((transducerDataConf.getTransducerLevel().subtract(transducerDataConf.getTransducerErrornum())).compareTo(analysisData) == -1)
                     && ((transducerDataConf.getTransducerLevel().add(transducerDataConf.getTransducerErrornum())).compareTo(analysisData) == 1)) {
@@ -131,8 +131,8 @@ public class DataServiceImpl implements DataService {
                     saveAndUpdate(boardId, transducerId, analysisType, analysisData, status);
 
                     // 在redis中设置一个时间标识,并设置过期时间
-                    jedisClient.set(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + transducerType + ":" + transducerId, "time");
-                    jedisClient.expire(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + transducerType + ":" + transducerId,
+                    jedisClient.set(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + analysisType + ":" + transducerId, "time");
+                    jedisClient.expire(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + analysisType + ":" + transducerId,
                             (transducerDataConf.getTransducerWarntime() * 60));
                 }
 
@@ -153,12 +153,12 @@ public class DataServiceImpl implements DataService {
                 // 判断时间标识是否为空
                 if (time == null || "".equals(time)) {
                     // 空则在redis中设置时间标识,并设置过期时间
-                    jedisClient.set(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + transducerType + ":" + transducerId, "time");
-                    jedisClient.expire(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + transducerType + ":" + transducerId,
+                    jedisClient.set(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + analysisType + ":" + transducerId, "time");
+                    jedisClient.expire(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + analysisType + ":" + transducerId,
                             (transducerDataConf.getTransducerWarntime() * 60));
                 } else {
                     // 重置过期时间
-                    jedisClient.expire(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + transducerType + ":" + transducerId,
+                    jedisClient.expire(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + analysisType + ":" + transducerId,
                             transducerDataConf.getTransducerWarntime() * 60);
                 }
 

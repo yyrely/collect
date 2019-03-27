@@ -39,6 +39,7 @@ public class Server {
                     byte[] data = packet.getData();
                     //String msg = new String(data);
                     String msg = StringUtils.bytesToHexString(data);
+                    //String msg = "00010106000100010017f655";
                     if(msg == null || "".equals(msg)) {
                         throw new RuntimeException("数据为空");
                     }

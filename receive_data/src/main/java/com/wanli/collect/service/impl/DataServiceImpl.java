@@ -35,10 +35,14 @@ public class DataServiceImpl implements DataService {
     private TransducerDao transducerDao = TransducerDaoImpl.getINSTANCE();
     private BoardDao boardDao = BoardDaoImpl.getINSTANCE();
     private TransducerConfService transducerConfService = TransducerConfServiceImpl.getInstance();
+
     //单例
-    private DataServiceImpl(){}
+    private DataServiceImpl() {
+    }
+
     private static DataService INSTANCE = new DataServiceImpl();
-    public static DataService getInstance(){
+
+    public static DataService getInstance() {
         return INSTANCE;
     }
 
@@ -66,19 +70,53 @@ public class DataServiceImpl implements DataService {
                         analysisData = new BigDecimal(Integer.parseInt(transducerData.substring(2, 4), 16) * (-1));
                     }
                     break;
-
                 case "0002":
                     analysisType = "湿度传感器";
                     // 解析湿度数据
+                    analysisData = new BigDecimal(Integer.parseInt(transducerData, 16));
+                    break;
+                case "0003":
+                    analysisType = "光强度传感器";
+                    // 解析光强度数据
+                    analysisData = new BigDecimal(Integer.parseInt(transducerData, 16));
+                    break;
+                case "0004":
+                    analysisType = "声音传感器";
+                    // 解析声音数据
+                    analysisData = new BigDecimal(Integer.parseInt(transducerData, 16));
+                    break;
+                case "0005":
+                    analysisType = "电压传感器";
+                    // 解析电压数据
+                    analysisData = new BigDecimal(Integer.parseInt(transducerData, 16));
+                    break;
+                case "0006":
+                    analysisType = "水压传感器";
+                    // 解析水压数据
+                    analysisData = new BigDecimal(Integer.parseInt(transducerData, 16));
+                    break;
+                case "0007":
+                    analysisType = "油压传感器";
+                    // 解析油压数据
+                    analysisData = new BigDecimal(Integer.parseInt(transducerData, 16));
+                    break;
+                case "0008":
+                    analysisType = "其他液压传感器";
+                    // 解析其他液压数据
+                    analysisData = new BigDecimal(Integer.parseInt(transducerData, 16));
+                    break;
+                case "0009":
+                    analysisType = "风速传感器";
+                    // 解析风速数据
                     analysisData = new BigDecimal(Integer.parseInt(transducerData, 16));
                     break;
                 default:
                     throw new RuntimeException("不存在该传感器，无法解析");
             }
 
-            TransducerConf transducerDataConf = transducerConfService.getTransducerConf(boardId,analysisType, transducerId);
+            TransducerConf transducerDataConf = transducerConfService.getTransducerConf(boardId, analysisType, transducerId);
 
-            if(transducerDataConf == null) {
+            if (transducerDataConf == null) {
                 throw new RuntimeException("传感器配置不存在");
             }
 
@@ -95,13 +133,13 @@ public class DataServiceImpl implements DataService {
                     // 在redis中设置一个时间标识,并设置过期时间
                     jedisClient.set(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + transducerType + ":" + transducerId, "time");
                     jedisClient.expire(Constant.TRANSDUCER_WARN_TIME_PRE + boardId + ":" + transducerType + ":" + transducerId,
-                            (transducerDataConf.getTransducerWarntime()*60));
+                            (transducerDataConf.getTransducerWarntime() * 60));
                 }
 
             } else {
                 // 判断是否过高
                 if (transducerDataConf.getTransducerMax().compareTo(analysisData) == -1) {
-                    PushMsg.testSendPush(analysisType.substring(0, 2) + Constant.HIGH_PUSH_MSG ,transducerDataConf.getApplicationFlag());
+                    PushMsg.testSendPush(analysisType.substring(0, 2) + Constant.HIGH_PUSH_MSG, transducerDataConf.getApplicationFlag());
                     status = 2;
                 }
                 // 判断是否过低
@@ -127,18 +165,16 @@ public class DataServiceImpl implements DataService {
             }
             // 事务提交
             DruidUtils.commit();
-        }catch (Exception e) {
-            log.info("have error : {}",e.getMessage());
+        } catch (Exception e) {
+            log.info("have error : {}", e.getMessage());
             DruidUtils.rollback();
-        }finally {
+        } finally {
             DruidUtils.close();
         }
-
-
     }
 
 
-    private void saveAndUpdate(String boardId, String transducerId, String analysisType, BigDecimal analysisData,Byte status) throws SQLException {
+    private void saveAndUpdate(String boardId, String transducerId, String analysisType, BigDecimal analysisData, Byte status) throws SQLException {
         // 创建一个data对象
         CollectData data = new CollectData();
         // 封装对象

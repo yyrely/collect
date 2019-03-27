@@ -20,11 +20,11 @@ public class Contants {
     /**
      * 传感器配置在redis中map的大key
      */
-    public static final String TRANSDUCER_CONF = "TRANSDUCER_CONF";
+    public static final String TRANSDUCER_CONF = "TRANSDUCER_CONF:";
 
     /**
      * 传感器多久记录在Redis中的标志
      */
-    public static final String TRANSDUCER_WARN_TIME_PRE = "WARN_TIME";
+    public static final String TRANSDUCER_WARN_TIME_PRE = "WARN_TIME:";
 
 }

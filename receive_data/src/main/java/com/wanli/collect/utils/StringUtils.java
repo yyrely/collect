@@ -87,7 +87,7 @@ public class StringUtils {
      * @return
      */
     public static String convertCRC(String msg){
-        String reverseCrc = msg.substring(msg.length()-4, msg.length());
+        String reverseCrc = msg.substring(msg.length()-4);
         String crc = reverseCrc.substring(2, 4)+reverseCrc.substring(0, 2);
         return crc;
     }

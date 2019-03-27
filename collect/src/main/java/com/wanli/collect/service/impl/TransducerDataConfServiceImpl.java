@@ -59,31 +59,31 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
     public Object updateTransducerDataConf(Long id, TransducerDataConf transducerDataConf) throws Exception {
 
         User user = RequestContext.getUserInfo();
-        if(user.getUserStatus() == UserStatusType.NORMAL) {
+        if (user.getUserStatus() == UserStatusType.NORMAL) {
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
 
         TransducerDataConf transducerDataConfInfo = transducerDataConfExtMapper.selectByPrimaryKey(id);
-        if(transducerDataConfInfo == null) {
+        if (transducerDataConfInfo == null) {
             throw new ServiceException(BaseErrorCode.PARAM_ILLEGAL);
         }
-        if(user.getUserStatus() == UserStatusType.CHARGE && !user.getApplicationFlag().equals(transducerDataConfInfo.getApplicationFlag())) {
+        if (user.getUserStatus() == UserStatusType.CHARGE && !user.getApplicationFlag().equals(transducerDataConfInfo.getApplicationFlag())) {
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
 
-        if(transducerDataConf.getTransducerMax() != null) {
+        if (transducerDataConf.getTransducerMax() != null) {
             transducerDataConfInfo.setTransducerMax(transducerDataConf.getTransducerMax());
         }
-        if(transducerDataConf.getTransducerMin() != null) {
+        if (transducerDataConf.getTransducerMin() != null) {
             transducerDataConfInfo.setTransducerMin(transducerDataConf.getTransducerMin());
         }
-        if(transducerDataConf.getTransducerErrornum() != null) {
+        if (transducerDataConf.getTransducerErrornum() != null) {
             transducerDataConfInfo.setTransducerErrornum(transducerDataConf.getTransducerErrornum());
         }
-        if(transducerDataConf.getTransducerLevel() != null) {
+        if (transducerDataConf.getTransducerLevel() != null) {
             transducerDataConfInfo.setTransducerLevel(transducerDataConf.getTransducerLevel());
         }
-        if(transducerDataConf.getTransducerWarntime() != null) {
+        if (transducerDataConf.getTransducerWarntime() != null) {
             transducerDataConfInfo.setTransducerWarntime(transducerDataConf.getTransducerWarntime());
         }
         //更新配置
@@ -93,11 +93,11 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
         //更新传感器状态
         Transducer transducer = transducerExtMapper.findTransducer(transducerDataConfInfo.getBoardId(), transducerDataConfInfo.getTransducerType(), transducerDataConfInfo.getTransducerId());
         DataStatusType status;
-        if(transducer.getTransducerNowdata().compareTo(transducerDataConfInfo.getTransducerMax()) == 1) {
+        if (transducer.getTransducerNowdata().compareTo(transducerDataConfInfo.getTransducerMax()) == 1) {
             status = DataStatusType.HIGH;
-        }else if(transducer.getTransducerNowdata().compareTo(transducerDataConfInfo.getTransducerMin()) == -1) {
+        } else if (transducer.getTransducerNowdata().compareTo(transducerDataConfInfo.getTransducerMin()) == -1) {
             status = DataStatusType.LOW;
-        }else {
+        } else {
             status = DataStatusType.NORMAL;
         }
         transducer.setTransducerStatus(status);
@@ -109,11 +109,12 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
         boardExtMapper.updateByPrimaryKeySelective(board);
 
         //更新Redis中配置信息
-        String key = transducerDataConfInfo.getBoardId()+ ":" +transducerDataConfInfo.getTransducerType()+ ":" +transducerDataConfInfo.getTransducerId();
+        String key = transducerDataConfInfo.getBoardId() + ":" + transducerDataConfInfo.getTransducerType() + ":" + transducerDataConfInfo.getTransducerId();
         String value = objectMapper.writeValueAsString(transducerDataConfInfo);
-        redisTemplate.opsForHash().put(Contants.TRANSDUCER_CONF, key, value);
+        redisTemplate.opsForValue().set(Contants.TRANSDUCER_CONF + key, value);
+        redisTemplate.expire(Contants.TRANSDUCER_CONF + key, 24,TimeUnit.HOURS);
         //将报警间隔时间置0
-        redisTemplate.expire(Contants.TRANSDUCER_WARN_TIME_PRE + key,0, TimeUnit.SECONDS);
+        redisTemplate.expire(Contants.TRANSDUCER_WARN_TIME_PRE + key, 0, TimeUnit.SECONDS);
         return null;
     }
 }

@@ -33,18 +33,18 @@ public class TransducerConfServiceImpl implements TransducerConfService {
         TransducerConf transducerConf = null;
         try {
             //从redis中取传感器配置
-            String json = jedisClient.hget(Constant.TRANSDUCER_CONF,boardId+":"+transducerType+":"+transducerId);
+            String json = jedisClient.get(Constant.TRANSDUCER_CONF + boardId + ":" + transducerType + ":" + transducerId);
             //将取出的json转为传感器配置对象
             //判读是否为空
             if(json == null || "".equals(json)) {
                 //从数据库中取传感器配置对象
                 transducerConf = transducerConfDao.getTransducerDataConf(boardId,transducerType,transducerId);
-
                 if(transducerConf == null) {
                     throw new RuntimeException("传感器配置不存在");
                 }
                 //写入到redis中去
-                jedisClient.hset(Constant.TRANSDUCER_CONF,boardId+":"+transducerType+":"+transducerId, JsonUtils.objectToJson(transducerConf));
+                jedisClient.set(Constant.TRANSDUCER_CONF + boardId + ":" + transducerType + ":" + transducerId, JsonUtils.objectToJson(transducerConf));
+                jedisClient.expire(Constant.TRANSDUCER_CONF + boardId + ":" + transducerType + ":" + transducerId, 24*60*60);
             }else {
                 transducerConf = JsonUtils.jsonToPojo(json, TransducerConf.class);
             }

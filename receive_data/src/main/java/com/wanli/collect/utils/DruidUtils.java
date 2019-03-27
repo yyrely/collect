@@ -34,6 +34,7 @@ public class DruidUtils {
                 // 从数据源中获取数据库连接
                 conn = getDataSource().getConnection();
                 // 将conn绑定到当前线程
+                conn.setAutoCommit(false);
                 threadLocal.set(conn);
             }
             return conn;

@@ -42,6 +42,7 @@ public class Server {
                     if(msg == null || "".equals(msg)) {
                         throw new RuntimeException("数据为空");
                     }
+                    msg = msg.toUpperCase();
                     log.info("receive data : {}" , msg);
                     //校验数据
                     String actionNum = msg.substring(4, 6);

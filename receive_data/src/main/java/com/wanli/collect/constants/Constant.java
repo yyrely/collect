@@ -10,17 +10,16 @@ public class Constant {
     /**
      * 传感器多久记录在Redis中的标志
      */
-    public static final String TRANSDUCER_WARN_TIME_PRE = "WARN_TIME";
+    public static final String TRANSDUCER_WARN_TIME_PRE = "WARN_TIME:";
 
     /**
      * 传感器配置在redis中map的大key
      */
-    public static final String TRANSDUCER_CONF = "TRANSDUCER_CONF";
+    public static final String TRANSDUCER_CONF = "TRANSDUCER_CONF:";
 
     /**
      * 过高警报语
      */
-
     public static final String HIGH_PUSH_MSG = "过高过高，警报";
 
     /**

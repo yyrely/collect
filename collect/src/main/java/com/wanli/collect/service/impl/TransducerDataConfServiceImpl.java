@@ -111,8 +111,7 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
         //更新Redis中配置信息
         String key = transducerDataConfInfo.getBoardId() + ":" + transducerDataConfInfo.getTransducerType() + ":" + transducerDataConfInfo.getTransducerId();
         String value = objectMapper.writeValueAsString(transducerDataConfInfo);
-        redisTemplate.opsForValue().set(Contants.TRANSDUCER_CONF + key, value);
-        redisTemplate.expire(Contants.TRANSDUCER_CONF + key, 24,TimeUnit.HOURS);
+        redisTemplate.expire(Contants.TRANSDUCER_CONF + key, 0,TimeUnit.SECONDS);
         //将报警间隔时间置0
         redisTemplate.expire(Contants.TRANSDUCER_WARN_TIME_PRE + key, 0, TimeUnit.SECONDS);
         return null;

@@ -6,5 +6,5 @@ package com.wanli.collect.service;
  */
 
 public interface DataService {
-    void save(String msg);
+    void save(String msg) throws Exception;
 }

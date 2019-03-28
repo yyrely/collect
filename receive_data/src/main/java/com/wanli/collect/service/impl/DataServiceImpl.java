@@ -47,7 +47,7 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
-    public void save(String msg) {
+    public void save(String msg) throws Exception{
 
         try {
             DruidUtils.startTransaction();
@@ -166,8 +166,8 @@ public class DataServiceImpl implements DataService {
             // 事务提交
             DruidUtils.commit();
         } catch (Exception e) {
-            log.info("have error : {}", e.getMessage());
             DruidUtils.rollback();
+            throw new Exception(e);
         } finally {
             DruidUtils.close();
         }

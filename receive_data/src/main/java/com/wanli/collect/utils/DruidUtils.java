@@ -52,8 +52,6 @@ public class DruidUtils {
                 conn = getConnection();
                 threadLocal.set(conn);
             }
-
-            conn.setAutoCommit(false);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -68,9 +66,7 @@ public class DruidUtils {
                 conn = getConnection();
                 threadLocal.set(conn);
             }
-
             conn.rollback();
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -78,15 +74,12 @@ public class DruidUtils {
 
     public static void commit() {
         try {
-
             Connection conn = threadLocal.get();
             if (conn == null) {
                 conn = getConnection();
                 threadLocal.set(conn);
             }
-
             conn.commit();
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

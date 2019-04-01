@@ -81,8 +81,4 @@ public class BoardController {
         return boardService.removeBoard(boardId);
     }
 
-
-
-
-
 }

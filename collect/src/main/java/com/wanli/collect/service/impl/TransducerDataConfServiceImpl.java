@@ -3,25 +3,23 @@ package com.wanli.collect.service.impl;
 import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
-import com.wanli.collect.dao.mapper.ext.BoardExtMapper;
-import com.wanli.collect.dao.mapper.ext.TransducerExtMapper;
-import com.wanli.collect.model.constants.DataStatusType;
-import com.wanli.collect.model.entity.Board;
-import com.wanli.collect.model.entity.Transducer;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wanli.collect.context.RequestContext;
+import com.wanli.collect.dao.mapper.ext.BoardExtMapper;
 import com.wanli.collect.dao.mapper.ext.TransducerDataConfExtMapper;
+import com.wanli.collect.dao.mapper.ext.TransducerExtMapper;
 import com.wanli.collect.exception.BaseErrorCode;
 import com.wanli.collect.exception.ServiceException;
 import com.wanli.collect.model.constants.Contants;
+import com.wanli.collect.model.constants.DataStatusType;
 import com.wanli.collect.model.constants.UserStatusType;
 import com.wanli.collect.model.domain.TransducerKeyBean;
+import com.wanli.collect.model.entity.Board;
+import com.wanli.collect.model.entity.Transducer;
 import com.wanli.collect.model.entity.TransducerDataConf;
 import com.wanli.collect.model.entity.User;
 import com.wanli.collect.service.TransducerDataConfService;
@@ -110,10 +108,11 @@ public class TransducerDataConfServiceImpl implements TransducerDataConfService 
 
         //更新Redis中配置信息
         String key = transducerDataConfInfo.getBoardId() + ":" + transducerDataConfInfo.getTransducerType() + ":" + transducerDataConfInfo.getTransducerId();
-        String value = objectMapper.writeValueAsString(transducerDataConfInfo);
+        //String value = objectMapper.writeValueAsString(transducerDataConfInfo);
         redisTemplate.expire(Contants.TRANSDUCER_CONF + key, 0,TimeUnit.SECONDS);
         //将报警间隔时间置0
         redisTemplate.expire(Contants.TRANSDUCER_WARN_TIME_PRE + key, 0, TimeUnit.SECONDS);
+
         return null;
     }
 }

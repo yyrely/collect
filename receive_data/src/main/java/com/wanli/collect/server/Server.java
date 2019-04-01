@@ -37,14 +37,13 @@ public class Server {
 
                     //接收数据
                     byte[] data = packet.getData();
-                    //String msg = new String(data);
                     String msg = StringUtils.bytesToHexString(data);
-                    //String msg = "00010106000100010017f655";
+                    //String msg = "00010106000100010013F796";
                     if(msg == null || "".equals(msg)) {
                         throw new RuntimeException("数据为空");
                     }
                     msg = msg.toUpperCase();
-                    log.info("receive data : {}" , msg);
+                    log.info("=========> receive data : {}" , msg);
                     //校验数据
                     String actionNum = msg.substring(4, 6);
                     String dataLength = msg.substring(6, 8);
@@ -54,12 +53,12 @@ public class Server {
                         //调用服务层方法，处理数据
                         try {
                             dataService.save(msg);
-                            log.info("data receive success: {}" , msg);
+                            log.info("<========= data receive success: {}" , msg);
                         } catch (Exception e) {
-                            log.error("have error : {}" , e.getMessage());
+                            log.error("<========= have error : {}" , e.getMessage());
                         }
                     } else {
-                        log.info("data format error : {}" , msg);
+                        log.info("<========= data format error : {}" , msg);
                     }
 
                 });

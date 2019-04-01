@@ -23,5 +23,6 @@
         WHERE board_id = #{transducerKeyBean.boardId}
         and transducer_type = #{transducerKeyBean.transducerType}
         and transducer_id = #{transducerKeyBean.transducerId}
+        order by desc
     </select>
 </mapper>

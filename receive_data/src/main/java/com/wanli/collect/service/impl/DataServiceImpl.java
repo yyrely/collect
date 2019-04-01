@@ -58,7 +58,7 @@ public class DataServiceImpl implements DataService {
             String transducerId = Integer.parseInt(msg.substring(12, 16), 16) + "";
             String transducerData = msg.substring(16, 20);
             BigDecimal analysisData;
-            byte status = 0;
+            byte status = 1;
             // 根据类型的不同,解析不同的数据
             switch (transducerType) {
                 case "0001":

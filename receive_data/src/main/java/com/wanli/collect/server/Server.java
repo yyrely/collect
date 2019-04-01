@@ -34,7 +34,6 @@ public class Server {
                 socket.receive(packet);
 
                 executor.execute(() -> {
-
                     //接收数据
                     byte[] data = packet.getData();
                     String msg = StringUtils.bytesToHexString(data);

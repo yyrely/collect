@@ -90,7 +90,6 @@ public class ApplicationServiceImpl implements ApplicationService {
 
         User user = RequestContext.getUserInfo();
 
-
         if(user.getUserStatus() != UserStatusType.GENERAL_MANAGER) {
             throw new ServiceException(BaseErrorCode.AUTHORITY_ILLEGAL);
         }
